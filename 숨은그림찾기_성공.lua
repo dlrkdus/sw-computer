@@ -10,7 +10,7 @@ local scene = composer.newScene()
 function scene:create( event )
 	local sceneGroup = self.view
 
-	local background= display.newImageRect("이미지/숨은그림찾기/white.png",1280,720)
+	local background= display.newImageRect("image/숨은그림찾기/white.png",1280,720)
 	background.x,background.y = display.contentWidth/2,display.contentHeight/2
 	sceneGroup:insert(background)
 
@@ -19,11 +19,11 @@ function scene:create( event )
 	hintText.size = 100
 	sceneGroup:insert(hintText)
 
-	local somsom = display.newImageRect("이미지/숨은그림찾기/솜솜이_성공.png",700,700)
+	local somsom = display.newImageRect("image/숨은그림찾기/솜솜이_성공.png",700,700)
 	somsom.x,somsom.y = display.contentWidth*0.84,display.contentHeight*0.6
 	sceneGroup:insert(somsom)
 
-	local t= display.newImageRect("이미지/숨은그림찾기/테두리.png",750,750)
+	local t= display.newImageRect("image/숨은그림찾기/테두리.png",750,750)
 	t.x,t.y = display.contentWidth/2,display.contentHeight/2
 	sceneGroup:insert(t)
 	

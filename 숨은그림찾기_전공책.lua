@@ -15,25 +15,25 @@ function scene:create( event )
 	S1:setFillColor(0)
 	sceneGroup:insert(S1)
 
-	local background= display.newImageRect("이미지/숨은그림찾기/white.png",1280,720)
+	local background= display.newImageRect("image/숨은그림찾기/white.png",1280,720)
 	background.x,background.y = display.contentWidth/2,display.contentHeight/2
 	background.alpha=1
 	sceneGroup:insert(background)
 
-	local map = display.newImageRect("이미지/숨은그림찾기/캠퍼스.jpg",941,529)
+	local map = display.newImageRect("image/숨은그림찾기/캠퍼스.jpg",941,529)
 	map.x,map.y = display.contentWidth*0.38,display.contentHeight*0.55
 	sceneGroup:insert(map)
 
-	local correct = display.newImageRect("이미지/숨은그림찾기/체크.png",100,70)
+	local correct = display.newImageRect("image/숨은그림찾기/체크.png",100,70)
 	correct.x,correct.y = display.contentWidth*0.476,display.contentHeight*0.325
 	correct.alpha=0
 	sceneGroup:insert(correct)
 
-	local somsom = display.newImageRect("이미지/숨은그림찾기/솜솜이.png",450,450)
+	local somsom = display.newImageRect("image/숨은그림찾기/솜솜이.png",450,450)
 	somsom.x,somsom.y = display.contentWidth*0.82,display.contentHeight*0.7
 	sceneGroup:insert(somsom)
 
-	local hint = display.newImageRect("이미지/숨은그림찾기/말풍선3.png",270,270)
+	local hint = display.newImageRect("image/숨은그림찾기/말풍선3.png",270,270)
 	hint.x,hint.y = display.contentWidth*0.86,display.contentHeight*0.458
 	sceneGroup:insert(hint)
 
@@ -49,7 +49,7 @@ function scene:create( event )
 
 
 
-	local time = display.newImageRect("이미지/숨은그림찾기/타이머.png", 80,80)
+	local time = display.newImageRect("image/숨은그림찾기/타이머.png", 80,80)
 	time.x,time.y = display.contentWidth*0.79, display.contentHeight*0.25
 	sceneGroup:insert(time)
 	
