@@ -28,9 +28,71 @@ function scene:create( event )
 	background.x = display.contentWidth/2
 	background.y = display.contentHeight/2
 
-	local som = display.newImageRect("image/메인/main_som2.png", 900, 835)
+	local som = display.newImageRect("image/som2.png", 635, 635)
 	som.x = display.contentCenterX
-	som.y = 300
+	som.y = 310
+	som.alpha = 1
+
+--과잠_1만 이 크기
+	  -- local clo = display.newImageRect("image/옷/과잠_1.png", 600, 355)
+   --    clo.x, clo.y = display.contentWidth/2 - 37, 405
+   --  clo:scale( -1, 1 )
+
+--2-5과잠
+   -- local clo = display.newImageRect("image/옷/과잠_5.png", 605, 355)
+   --    clo.x, clo.y = display.contentWidth/2 - 41, 405
+   --  clo:scale( -1, 1 )
+
+--동물 1-3, 5
+	-- local clo2 = display.newImageRect("image/옷/동물_5.png", 208, 178)
+ --    clo2.x, clo2.y = display.contentWidth/2, 504
+ --    clo2:scale( -1, 1 )    
+
+--동물_4
+	-- local clo2 = display.newImageRect("image/옷/동물_4.png", 208, 165)
+ --    clo2.x, clo2.y = display.contentWidth/2, 514
+ --    clo2:scale( -1, 1 )    
+
+-- --원피스 다
+--     local clo3 = display.newImageRect("image/옷/투피스_5.png", 435, 373)
+--     clo3.x, clo3.y = display.contentWidth/2 -77, 390
+--     clo3:scale( -1, 1 ) 
+
+--local ribbon = display.newImageRect("image/아이템/리본_2.png", 160, 120)
+  --  ribbon.x, ribbon.y = display.contentWidth/2 + 50, 270
+   --ribbon.rotation = 10
+
+    local gl = display.newImageRect("image/아이템/안경_3.png", 73, 35)
+    gl.x, gl.y = display.contentWidth/2-1.2, 337.5
+     gl:scale( -1, 1 ) 
+     gl.rotation = 357
+
+--모자_1
+    -- local h = display.newImageRect("image/아이템/모자_1.png", 180, 90)
+    -- h.x, h.y = display.contentWidth/2 - 70, 260
+    --  h.rotation = 320
+
+    -- --모자_2
+    --  local h = display.newImageRect("image/아이템/모자_2.png", 170, 115)
+    -- h.x, h.y = display.contentWidth/2 - 70, 270
+    --  h.rotation = 290
+
+--모자3_6
+
+--     local h = display.newImageRect("image/아이템/모자_6.png", 140, 75)
+--    h.x, h.y = display.contentWidth/2+30, 245
+--     h:scale( -1, 1 ) 
+--     h.rotation = 10
+ 
+  --   local h3= display.newImageRect("image/아이템/왕관_2.png", 70, 55)
+  --   h3.x, h3.y = display.contentWidth/2 + 30, 245
+   --  h3.rotation = 20
+
+     --  local h4= display.newImageRect("image/아이템/잎_1.png", 60, 60)
+    --    h4.x, h4.y = display.contentWidth/2 + 85, 255
+
+    local h5= display.newImageRect("image/아이템/헤드셋_1.png", 245, 140)
+    h5.x, h5.y = display.contentWidth/2, 300
 
 	local cloud = display.newImageRect("image/메인/cloud.png", 200, 200)
 	cloud.x = 150
