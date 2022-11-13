@@ -8,24 +8,28 @@ local loadsave = require( "loadsave" )
 local composer = require( "composer" )
 local json = require( "json" )
 local scene = composer.newScene()
-local loadedItem= loadsave.loadTable( "setting.json" )
+local loadedSettings = loadsave.loadTable( "setting.json" )
+
 
 function scene:create( event )
 	local sceneGroup = self.view
-	
+
+
+	local item=composer.getVariable("item", item)
+	local money=composer.getVariable("money", money)
+
+
 
 	local background= display.newImageRect("image/숨은그림찾기/white.png",1280,720)
 	background.x,background.y = display.contentWidth/2,display.contentHeight/2
 	sceneGroup:insert(background)
 
-
 	--돈
-	local m = loadedItem.money
+	local m = loadedSettings.money
 	local showLimit = display.newText(m,display.contentWidth*0.85,display.contentHeight*0.2)
 	showLimit:setFillColor(0)
 	showLimit.size =40
 	sceneGroup:insert(showLimit)
-	
 
 	--음식
 	local tteokbokki = display.newImageRect("image/상점/떡볶이.jpeg",150,150)
@@ -93,42 +97,120 @@ function scene:create( event )
 	showLimit.size =40
 	sceneGroup:insert(showLimit)
 
-
 	local next = display.newImageRect("image/상점/화살표.png",80,140)
 	next.x,next.y = display.contentWidth*0.96,display.contentHeight*0.5
 	sceneGroup:insert(next)
 
-	--구매함수
+	--팝업창
 
-	local item
-	local function buy(event)
-		item=event.target.name
-		money = event.target.id
-		composer.setVariable("item", item)
-		composer.setVariable("money", money)
-		composer.removeScene("상점")
-	   	composer.gotoScene("상점_popup")
+	local p=display.newRect(display.contentWidth*0.5, display.contentHeight*0.5,500,400)
+	p:setFillColor(1)
+	sceneGroup:insert(p)
 
+	local p_edge = display.newImageRect("image/상점/테두리_꽃.png",570,480)
+	p_edge.x,p_edge.y = display.contentWidth*0.5,display.contentHeight*0.5
+	sceneGroup:insert(p_edge)
+
+	local S1text = display.newText("        상품을\n구매하시겠습니까?",display.contentWidth*0.5,display.contentHeight*0.54)
+	S1text:setFillColor(0)
+	S1text.size =40
+	sceneGroup:insert(S1text)
+
+
+		local selectItem1 = display.newImageRect("image/상점/떡볶이.jpeg",150,150)
+		selectItem1.x,selectItem1.y = display.contentWidth*0.5,display.contentHeight*0.36
+		sceneGroup:insert(selectItem1)
+		local selectItem2 = display.newImageRect("image/상점/어묵.jpeg",150,150)
+		selectItem2.x,selectItem2.y = display.contentWidth*0.5,display.contentHeight*0.36
+		sceneGroup:insert(selectItem2)
+		local selectItem3 = display.newImageRect("image/상점/순대.jpeg",150,150)
+		selectItem3.x,selectItem3.y = display.contentWidth*0.5,display.contentHeight*0.36
+		sceneGroup:insert(selectItem3)
+		local selectItem4 = display.newImageRect("image/상점/스테이크.jpeg",150,150)
+		selectItem4.x,selectItem4.y = display.contentWidth*0.5,display.contentHeight*0.36
+		sceneGroup:insert(selectItem4)
+		local selectItem5 = display.newImageRect("image/상점/튀김.jpeg",150,150)
+		selectItem5.x,selectItem5.y = display.contentWidth*0.5,display.contentHeight*0.36
+		sceneGroup:insert(selectItem5)
+		selectItem1.alpha=0
+		selectItem2.alpha=0
+		selectItem3.alpha=0
+		selectItem4.alpha=0
+		selectItem5.alpha=0
+
+	if item=="tteokbokki" then 
+		selectItem1.alpha=1
+	elseif item=="fishCake" then 
+		selectItem2.alpha=1
+	elseif item=="sundae" then 
+		selectItem3.alpha=1
+	elseif item=="steak" then 
+		selectItem4.alpha=1
+	elseif item=="fried" then
+		selectItem5.alpha=1
+	else
+		selectItem1.alpha=1
 	end
-	tteokbokki:addEventListener("touch",buy)
-	fishCake:addEventListener("touch",buy)
-	sundae:addEventListener("touch",buy)
-	steak:addEventListener("touch",buy)
-	fried:addEventListener("touch",buy)
 
 
-	local function nextStore(event)
-		composer.removeScene("상점")
-	   	composer.gotoScene("상점_옷")
-	end
-	next:addEventListener("touch",nextStore)
-	
-	
+	local S1=display.newRect(display.contentWidth*0.41, display.contentHeight*0.69,150,70)
+	S1:setFillColor(0)
+	sceneGroup:insert(S1)
+
+	local S1text = display.newText("예",display.contentWidth*0.41,display.contentHeight*0.69)
+	S1text:setFillColor(1)
+	S1text.size =40
+	sceneGroup:insert(S1text)
+
+	local S2=display.newRect(display.contentWidth*0.59, display.contentHeight*0.69,150,70)
+	S2:setFillColor(0)
+	sceneGroup:insert(S2)
+
+	local S2text = display.newText("아니오",display.contentWidth*0.59,display.contentHeight*0.69)
+	S2text:setFillColor(1)
+	S2text.size =40
+	sceneGroup:insert(S2text)
+
+	 local function buy_popup(event)
+	        if loadedSettings.money-money>=0 then
+            if item=="tteokbokki" then
+               loadedSettings.tteokbokki_count=loadedSettings.tteokbokki_count+1            
+            end
+
+            if item=="fishCake" then
+               loadedSettings.fishCake_count=loadedSettings.fishCake_count+1            
+            end
+
+            if item=="sundae" then
+               loadedSettings.sundae_count=loadedSettings.sundae_count+1            
+            end
+
+            if item=="steak" then
+               loadedSettings.steak_count=loadedSettings.steak_count+1            
+            end
+
+            if item=="fried" then
+               loadedSettings.fried_count=loadedSettings.fried_count+1            
+            end
+            loadedSettings.money=loadedSettings.money-money
+       		else
+       			S1.alpha=0
+       			S1text.text="잔액이 부족합니다"
+       			S2text.text="나가기"
+       		end
 
 
+         loadsave.saveTable(loadedSettings,"setting.json")
+         composer.removeScene("상점_popup")
+         composer.gotoScene("상점")
+      end
+      S1:addEventListener("touch",buy_popup)
 
-
-
+      local function popup_down(event)
+      	composer.removeScene("상점_popup")
+        composer.gotoScene("상점")
+       end
+       S2:addEventListener("touch",popup_down)
 
 
 

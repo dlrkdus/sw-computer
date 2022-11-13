@@ -14,7 +14,7 @@ local composer = require "composer"
 
 -- event listeners for tab buttons:
 local function onFirstView( event )
-    composer.gotoScene( "메인화면" )
+    composer.gotoScene( "title" )
 end
 
 
