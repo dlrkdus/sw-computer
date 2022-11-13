@@ -201,10 +201,15 @@ function scene:create( event )
             if item=="fried" then
                loadedSettings.fried_count=loadedSettings.fried_count+1            
             end
+			S1.alpha=0
+			S2text.alpha=0
+			buyText.text="구매가 완료되었습니다"
+			S2.alpha=0
+			S3.alpha=1
+			S3text.text="나가기"
+
             loadedSettings.money=loadedSettings.money-money
 			loadsave.saveTable(loadedSettings,"setting.json")
-         	composer.removeScene("상점_popup")
-         	composer.gotoScene("상점")
        		else
 				S1.alpha=0
 				S2text.alpha=0
@@ -219,14 +224,15 @@ function scene:create( event )
 
          
       end
-      S1:addEventListener("touch",buy_popup)
+      S1:addEventListener("tap",buy_popup)
 
       local function popup_down(event)
       	composer.removeScene("상점_popup")
         composer.gotoScene("상점")
        end
-       S2:addEventListener("touch",popup_down)
-	   S3:addEventListener("touch",popup_down)
+	   
+       S2:addEventListener("tap",popup_down)
+	   S3:addEventListener("tap",popup_down)
 
 
 

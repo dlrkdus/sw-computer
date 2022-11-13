@@ -385,20 +385,25 @@ function scene:create( event )
 	         if item=="twopiece5" then
 	            loadedItem.twopiece5_count=loadedItem.twopiece5_count+1            
 	         end
-	        loadedItem.money=loadedItem.money-money
-			loadsave.saveTable(loadedItem,"setting.json")
-         	composer.removeScene("상점_옷_popup")
-         	composer.gotoScene("상점_옷")
-			else 
-				S1.alpha=0
-				S2text.alpha=0
-				buyText.text="잔액이 부족합니다."
-				S2.alpha=0
-				S3.alpha=1
-				S3text.text="나가기"
-				
-       			
-       		end
+			 S1.alpha=0
+			 S2text.alpha=0
+			 buyText.text="구매가 완료되었습니다"
+			 S2.alpha=0
+			 S3.alpha=1
+			 S3text.text="나가기"
+ 
+			 loadedItem.money=loadedItem.money-money
+			 loadsave.saveTable(loadedItem,"setting.json")
+				else
+				 S1.alpha=0
+				 S2text.alpha=0
+				 buyText.text="잔액이 부족합니다."
+				 S2.alpha=0
+				 S3.alpha=1
+				 S3text.text="나가기"
+				 
+					
+				end
 
        		
 
