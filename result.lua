@@ -4,8 +4,13 @@
 --
 -----------------------------------------------------------------------------------------
 
+local loadsave = require( "loadsave" )
 local composer = require( "composer" )
 local scene = composer.newScene()
+local json = require( "json" ) 
+
+local loadedSettings = loadsave.loadTable( "setting.json" )
+local loadedItems= loadsave.loadTable( "items.json" )
 
 -- 2) 전달한 변수값 불러오기
 local resultScore = composer.getVariable("score")
@@ -22,12 +27,16 @@ function scene:create( event )
 	local endText = display.newText("Clear", display.contentWidth/2, display.contentHeight/2 - 50, "font/NanumYeBbeunMinGyeongCe.ttf", 200)
 	endText:setFillColor(0)
 
-	local retry = display.newText("RETRY", display.contentWidth/2, display.contentHeight/2 + 130, "font/NanumYeBbeunMinGyeongCe.ttf", 120)
+	local retry = display.newText("RETRY", display.contentWidth/2, display.contentHeight/2 + 10, "font/NanumYeBbeunMinGyeongCe.ttf", 120)
 	retry:setFillColor(0)
 	retry.alpha = 0
 
 	local quit = display.newText(" ", display.contentWidth/2, display.contentHeight/2 + 130, "font/NanumYeBbeunMinGyeongCe.ttf", 120)
 	quit:setFillColor(0)
+
+	local quit2 = display.newText("게임 나가기", display.contentWidth/2, display.contentHeight/2 + 120, "font/NanumYeBbeunMinGyeongCe.ttf", 100)
+	quit2:setFillColor(0)
+	quit2.alpha = 0
 
 	local function flashing_text(textToFlash)
 	    local r = math.random(0,100)
@@ -48,6 +57,7 @@ function scene:create( event )
 		sceneGroup:insert(mainGroup)
 	    sceneGroup:insert(retry)
 	   	sceneGroup:insert(quit)
+	   	sceneGroup:insert(quit2)
 
 		composer.removeScene("result")
 	   	composer.gotoScene("game_main", { time=800, effect="crossFade" })
@@ -59,11 +69,27 @@ function scene:create( event )
 		sceneGroup:insert(mainGroup)
 	    sceneGroup:insert(retry)
 	   	sceneGroup:insert(quit)
+	   	sceneGroup:insert(quit2)
 
+	loadedSettings.money = loadedSettings.money + 200
+	loadsave.saveTable(loadedSettings,"setting.json")
 		composer.removeScene("result")
-	   	composer.gotoScene("title", { time=800, effect="crossFade" })
+	   	composer.gotoScene("학점받기", { time=800, effect="crossFade" })
 	end
 
+	local function exitGame2(event)
+		sceneGroup:insert(bg2)
+		sceneGroup:insert(endText)
+		sceneGroup:insert(mainGroup)
+	    sceneGroup:insert(retry)
+	   	sceneGroup:insert(quit)
+	   	sceneGroup:insert(quit2)
+
+	loadedSettings.money = loadedSettings.money + 20
+	loadsave.saveTable(loadedSettings,"setting.json")
+		composer.removeScene("result")
+	   	composer.gotoScene("학점받기", { time=800, effect="crossFade" })
+	end
 	if resultScore >= 1200 then
 		endText.text = "CLEAR"
 		quit.text = "quit"
@@ -71,8 +97,11 @@ function scene:create( event )
 	elseif resultScore <= 0 then
 		endText.text = "GAME OVER"
 		endText.size = 170
+		endText.y = display.contentHeight/2 - 150
 		retry.alpha = 1
 		retry:addEventListener("tap", reGame)
+		quit2.alpha = 1		
+		quit2:addEventListener("tap", exitGame2)
 	end	
 
 end
