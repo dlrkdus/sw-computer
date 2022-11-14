@@ -52,7 +52,7 @@ function scene:create( event )
 	   	sceneGroup:insert(guide)
 	   	sceneGroup:insert(gBox)
 
-	   	composer.gotoScene("상점", { time=800, effect="crossFade" })
+	   	composer.gotoScene("메인화면", { time=800, effect="crossFade" })
 	end
 
 	gBox:addEventListener("tap", goToGuide)

@@ -4,8 +4,13 @@
 --
 -----------------------------------------------------------------------------------------
 
+local loadsave = require( "loadsave" )
 local composer = require( "composer" )
 local scene = composer.newScene()
+local json = require( "json" ) 
+
+local loadedSettings = loadsave.loadTable( "setting.json" )
+local loadedItems= loadsave.loadTable( "items.json" )
 
 function scene:create( event )
 	local sceneGroup = self.view
@@ -28,7 +33,8 @@ function scene:create( event )
 	somsom.x,somsom.y = display.contentWidth*0.67,display.contentHeight*0.2
 	sceneGroup:insert(somsom)
 
-
+	loadedSettings.money = loadedSettings.money + 20
+	loadsave.saveTable(loadedSettings,"setting.json")
 	
 end
 
