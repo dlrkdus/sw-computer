@@ -1,29 +1,17 @@
-
+-----------------------------------------------------------------------------------------
+--
+-- 메인화면.lua
+--
+-----------------------------------------------------------------------------------------
 
 local composer = require( "composer" )
 local scene = composer.newScene()
+local widget = require( "widget" )
+local buttonUI = {}
 
 function scene:create( event )
 	local sceneGroup = self.view
-	local widget = require( "widget" )
-	local buttonUI = {}
-
-	function inputEvent( event )
-	    if event.target.name == "picture" then
-	        transition.to(buttonUI[1], {time = 5, alpha = 0})
-	        --local t = timer.performWithDelay(1000, goProlog, 1)
-	    elseif event.target.name == "balloon" then
-	        transition.to(buttonUI[2], {time = 5, alpha = 0})
-	        --local t2 = timer.performWithDelay(1000, goInfo, 1)
-	    elseif event.target.name == "report" then
-	        transition.to(buttonUI[3], {time = 5, alpha = 0})
-	        --local t2 = timer.performWithDelay(1000, goInfo, 1)
-	    elseif event.target.name == "store" then
-	        transition.to(buttonUI[4], {time = 5, alpha = 0})
-	        --local t2 = timer.performWithDelay(1000, goInfo, 1)
-	    end
-	end
-
+	
 	local background = display.newImageRect( "image/메인/main_bg.jpg", 1280, 720 )
 	background.x = display.contentWidth/2
 	background.y = display.contentHeight/2
@@ -48,45 +36,88 @@ function scene:create( event )
 	cloud4.x = 780
 	cloud4.y = 145
 
-	local cloud6 = display.newImageRect("image/메인/cloud.png", 200, 200)
-	cloud6.x = 980
-	cloud6.y = 285
+	local cloud5 = display.newImageRect("image/메인/cloud.png", 200, 200)
+	cloud5.x = 980
+	cloud5.y = 285
 
+	function gotoPic( event )
+		composer.gotoScene( "숨은그림찾기_솜솜")
+	end
+
+	function gotoBal( event )
+		composer.gotoScene( "풍선터트리기_20초" ) 
+	end
+
+	--function gotoRepo( event )
+		--composer.gotoScene( "풍선터트리기_20초" ) 
+	--end
+
+	function gotoStore( event )
+		composer.gotoScene("상점")
+	end
+
+	function inputEvent( event )
+        if event.target.name == "picture" then
+            --transition.to(buttonUI[1], {time = 300, alpha = 0})
+            local t = timer.performWithDelay(1000, gotoPic, 1)
+        elseif event.target.name == "balloon" then
+            --transition.to(buttonUI[2], {time = 500, alpha = 0})
+            local t2 = timer.performWithDelay(1000, gotoBal, 1)
+        elseif event.target.name == "report" then
+            --transition.to(buttonUI[3], {time = 500, alpha = 0})
+            local t3 = timer.performWithDelay(1000, gotoBal, 1)
+        elseif event.target.name == "store" then
+            --transition.to(buttonUI[4], {time = 500, alpha = 0})
+            local t4 = timer.performWithDelay(1000, gotoStore, 1)
+        end
+    end
+
+	
 	local minigame = display.newImageRect("image/메인/minigame_logo.png", 120, 100)
 	minigame.x = 1150
 	minigame.y = 60
 
+
 	buttonUI[1] = widget.newButton(
-		{ defaultFile = "image/메인/picture.png", overFile = "image/메인/picture.png", 
-		width = 150, height = 150, onPress = inputEvent })
+		{ defaultFile = "image/메인/picture.png", overFile = "image/메인/picture.png",
+		width = 150 , height = 150, onPress = inputEvent })
 	buttonUI[1].x = 1155
 	buttonUI[1].y = 150
 	buttonUI[1].name = "picture"
 
 	buttonUI[2] = widget.newButton(
 		{ defaultFile = "image/메인/balloon.png", overFile = "image/메인/balloon.png",
-		width = 100 , height = 100, onPress = inputEvent})
+		width = 100 , height = 100, onPress = inputEvent })
 	buttonUI[2].x = 1160
 	buttonUI[2].y = 250
 	buttonUI[2].name = "balloon"
 
 	buttonUI[3] = widget.newButton(
 		{ defaultFile = "image/메인/report.png", overFile = "image/메인/report.png",
-		width = 100 , height = 100, onPress = inputEvent })
+		width = 100 , height = 100 , onPress = inputEvent})
 	buttonUI[3].x = 1168
 	buttonUI[3].y = 355
 	buttonUI[3].name = "report"
 
 	buttonUI[4] = widget.newButton(
 		{	defaultFile = "image/메인/store.png", overFile = "image/메인/store.png",
-			width = 300, height = 310, onPress = inputEvent })
+			width = 300, height = 310, onPress = inputEvent})
 	buttonUI[4].x = 180
 	buttonUI[4].y = 450
 	buttonUI[4].name = "store"
 
+	sceneGroup:insert(background)
+	sceneGroup:insert(som)
+	sceneGroup:insert(cloud)
+	sceneGroup:insert(cloud2)
+	sceneGroup:insert(cloud3)
+	sceneGroup:insert(cloud4)
+	sceneGroup:insert(cloud5)
+   	sceneGroup:insert(buttonUI[1])
+   	sceneGroup:insert(buttonUI[2])
+   	sceneGroup:insert(buttonUI[3])
+   	sceneGroup:insert(buttonUI[4])
 end
-	
-
 
 function scene:show( event )
 	local sceneGroup = self.view
@@ -113,6 +144,7 @@ function scene:hide( event )
 		-- e.g. stop timers, stop animation, unload sounds, etc.)
 	elseif phase == "did" then
 		-- Called when the scene is now off screen
+		composer.removeScene("메인화면")
 	end
 end
 
