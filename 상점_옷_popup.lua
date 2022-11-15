@@ -8,7 +8,7 @@ local loadsave = require( "loadsave" )
 local composer = require( "composer" )
 local json = require( "json" )
 local scene = composer.newScene()
-local loadedItem= loadsave.loadTable( "clothes.json" )
+local loadedClothes= loadsave.loadTable( "clothes.json" )
 local loadedSetting= loadsave.loadTable( "settings.json" )
 
 
@@ -24,165 +24,257 @@ function scene:create( event )
 	sceneGroup:insert(background)
 
 
-
+print(item)
 
 	--옷
 	local gwajam1 = display.newImageRect("image/상점/과잠_1.png",160,135)
 	gwajam1.x,gwajam1.y = display.contentWidth*0.15,display.contentHeight*0.15
-	gwajam1.alpha=loadedItem.g1Sold+0.5
 	sceneGroup:insert(gwajam1)
+	gwajam1.name="gwajam1"
+	gwajam1.alpha=loadedClothes.g1Sold+0.5
+	gwajam1.id=500
 
 	local gwajam2 = display.newImageRect("image/상점/과잠_2.png",160,135)
 	gwajam2.x,gwajam2.y = display.contentWidth*0.33,display.contentHeight*0.15
-	gwajam2.alpha=loadedItem.g2Sold+0.5
 	sceneGroup:insert(gwajam2)
+	gwajam2.name="gwajam2"
+	gwajam2.alpha=loadedClothes.g2Sold+0.5
+	gwajam2.id=500
 
 	local gwajam3 = display.newImageRect("image/상점/과잠_3.png",160,135)
 	gwajam3.x,gwajam3.y = display.contentWidth*0.5,display.contentHeight*0.15
-	gwajam3.alpha=loadedItem.g3Sold+0.5
 	sceneGroup:insert(gwajam3)
+	gwajam3.name="gwajam3"
+	gwajam3.alpha=loadedClothes.g3Sold+0.5
+	gwajam3.id=500
 
 	local gwajam4 = display.newImageRect("image/상점/과잠_4.png",160,135)
 	gwajam4.x,gwajam4.y = display.contentWidth*0.67,display.contentHeight*0.15
-	gwajam4.alpha=loadedItem.g4Sold+0.5
 	sceneGroup:insert(gwajam4)
+	gwajam4.name="gwajam4"
+	gwajam4.alpha=loadedClothes.g4Sold+0.5
+	gwajam4.id=500
 
 	local gwajam5 = display.newImageRect("image/상점/과잠_5.png",160,135)
 	gwajam5.x,gwajam5.y = display.contentWidth*0.85,display.contentHeight*0.15
-	gwajam5.alpha=loadedItem.g5Sold+0.5
 	sceneGroup:insert(gwajam5)
+	gwajam5.name="gwajam5"
+	gwajam5.alpha=loadedClothes.g5Sold+0.5
+	gwajam5.id=500
 
 
 	local animal1 = display.newImageRect("image/상점/동물_1.png",135,135)
 	animal1.x,animal1.y = display.contentWidth*0.15,display.contentHeight*0.45
-	animal1.alpha=loadedItem.a1Sold+0.5
 	sceneGroup:insert(animal1)
+	animal1.name="animal1"
+	animal1.alpha=loadedClothes.a1Sold+0.5
+	animal1.id=1000
 
 	local animal2 = display.newImageRect("image/상점/동물_2.png",135,135)
 	animal2.x,animal2.y = display.contentWidth*0.33,display.contentHeight*0.45
-	animal2.alpha=loadedItem.a2Sold+0.5
 	sceneGroup:insert(animal2)
+	animal2.name="animal2"
+	animal2.alpha=loadedClothes.a2Sold+0.5
+	animal2.id=1000
 
 	local animal3 = display.newImageRect("image/상점/동물_3.png",135,135)
 	animal3.x,animal3.y = display.contentWidth*0.5,display.contentHeight*0.45
-	animal3.alpha=loadedItem.a3Sold+0.5
 	sceneGroup:insert(animal3)
+	animal3.name="animal3"
+	animal3.alpha=loadedClothes.a3Sold+0.5
+	animal3.id=1000
 
 	local animal4 = display.newImageRect("image/상점/동물_4.png",135,135)
 	animal4.x,animal4.y = display.contentWidth*0.67,display.contentHeight*0.45
-	animal4.alpha=loadedItem.a4Sold+0.5
 	sceneGroup:insert(animal4)
+	animal4.name="animal4"
+	   animal4.alpha=loadedClothes.a4Sold+0.5
+	animal4.id=1000
 
 	local animal5 = display.newImageRect("image/상점/동물_5.png",135,135)
 	animal5.x,animal5.y = display.contentWidth*0.85,display.contentHeight*0.45
-	animal5.alpha=loadedItem.a5Sold+0.5
 	sceneGroup:insert(animal5)
+	animal5.name="animal5"
+	   animal5.alpha=loadedClothes.a5Sold+0.5
+	animal5.id=1000
 
 
 	local twopiece1 = display.newImageRect("image/상점/투피스_1.png",135,135)
 	twopiece1.x,twopiece1.y = display.contentWidth*0.15,display.contentHeight*0.75
-	twopiece1.alpha=loadedItem.t1Sold+0.5
 	sceneGroup:insert(twopiece1)
+	twopiece1.name="twopiece1"
+	   twopiece1.alpha=loadedClothes.t1Sold+0.5
+	twopiece1.id=2000
 
 	local twopiece2 = display.newImageRect("image/상점/투피스_2.png",135,135)
 	twopiece2.x,twopiece2.y = display.contentWidth*0.33,display.contentHeight*0.75
-	twopiece2.alpha=loadedItem.t2Sold+0.5
 	sceneGroup:insert(twopiece2)
+	twopiece2.name="twopiece2"
+	   twopiece2.alpha=loadedClothes.t2Sold+0.5
+	twopiece2.id=2000
 
 	local twopiece3 = display.newImageRect("image/상점/투피스_3.png",135,135)
 	twopiece3.x,twopiece3.y = display.contentWidth*0.5,display.contentHeight*0.75
-	twopiece3.alpha=loadedItem.t3Sold+0.5
 	sceneGroup:insert(twopiece3)
+	twopiece3.name="twopiece3"
+	   twopiece3.alpha=loadedClothes.t3Sold+0.5
+	twopiece3.id=2000
 
 	local twopiece4 = display.newImageRect("image/상점/투피스_4.png",135,135)
 	twopiece4.x,twopiece4.y = display.contentWidth*0.67,display.contentHeight*0.75
-	twopiece4.alpha=loadedItem.t4Sold+0.5
 	sceneGroup:insert(twopiece4)
+	twopiece4.name="twopiece4"
+	   twopiece4.alpha=loadedClothes.t4Sold+0.5
+	twopiece4.id=2000
 
 	local twopiece5 = display.newImageRect("image/상점/투피스_5.png",135,135)
 	twopiece5.x,twopiece5.y = display.contentWidth*0.85,display.contentHeight*0.75
-	twopiece5.alpha=loadedItem.t5Sold+0.5
 	sceneGroup:insert(twopiece5)
+	twopiece5.name="twopiece5"
+	   twopiece5.alpha=loadedClothes.t5Sold+0.5
+	twopiece5.id=2000
+
 
 
 --soldout
 
-	local g1_soldOut = display.newImageRect("image/상점/soldout.png",160,135)
+	local g1_soldOut = display.newImageRect("image/상점/soldout.png",135,135)
 	g1_soldOut.x,g1_soldOut.y = display.contentWidth*0.15,display.contentHeight*0.15
 	sceneGroup:insert(g1_soldOut)
-	g1_soldOut.alpha=loadedItem.g1Sold
+	if loadedClothes.g1Sold==0 then 
+		g1_soldOut.alpha=1
+	else 
+		g1_soldOut.alpha=0
+	end
 
-	local g2_soldOut = display.newImageRect("image/상점/soldout.png",160,135)
+	local g2_soldOut = display.newImageRect("image/상점/soldout.png",135,135)
 	g2_soldOut.x,g2_soldOut.y = display.contentWidth*0.33,display.contentHeight*0.15
 	sceneGroup:insert(g2_soldOut)
-	g2_soldOut.alpha=loadedItem.g2Sold
+	if loadedClothes.g2Sold==0 then 
+		g2_soldOut.alpha=1
+	else 
+		g2_soldOut.alpha=0
+	end
 
-	local g3_soldOut = display.newImageRect("image/상점/soldout.png",160,135)
+	local g3_soldOut = display.newImageRect("image/상점/soldout.png",135,135)
 	g3_soldOut.x,g3_soldOut.y = display.contentWidth*0.5,display.contentHeight*0.15
 	sceneGroup:insert(g3_soldOut)
-	g3_soldOut.alpha=loadedItem.g3Sold
+	if loadedClothes.g3Sold==0 then 
+		g3_soldOut.alpha=1
+	else 
+		g3_soldOut.alpha=0
+	end
 
-	local g4_soldOut = display.newImageRect("image/상점/soldout.png",160,135)
+	local g4_soldOut = display.newImageRect("image/상점/soldout.png",135,135)
 	g4_soldOut.x,g4_soldOut.y = display.contentWidth*0.67,display.contentHeight*0.15
 	sceneGroup:insert(g4_soldOut)
-	g4_soldOut.alpha=loadedItem.g4Sold
+	if loadedClothes.g4Sold==0 then 
+		g4_soldOut.alpha=1
+	else 
+		g4_soldOut.alpha=0
+	end
 
-	local g5_soldOut = display.newImageRect("image/상점/soldout.png",160,135)
+	local g5_soldOut = display.newImageRect("image/상점/soldout.png",135,135)
 	g5_soldOut.x,g5_soldOut.y = display.contentWidth*0.85,display.contentHeight*0.15
 	sceneGroup:insert(g5_soldOut)
-	g5_soldOut.alpha=loadedItem.g5Sold
+	if loadedClothes.g5Sold==0 then 
+		g5_soldOut.alpha=1
+	else 
+		g5_soldOut.alpha=0
+	end
 
 
 	local a1_soldOut = display.newImageRect("image/상점/soldout.png",135,135)
 	a1_soldOut.x,a1_soldOut.y = display.contentWidth*0.15,display.contentHeight*0.45
 	sceneGroup:insert(a1_soldOut)
-	a1_soldOut.alpha=loadedItem.a1Sold
+	if loadedClothes.a1Sold==0 then 
+		a1_soldOut.alpha=1
+	else 
+		a1_soldOut.alpha=0
+	end
 
 	local a2_soldOut = display.newImageRect("image/상점/soldout.png",135,135)
 	a2_soldOut.x,a2_soldOut.y = display.contentWidth*0.33,display.contentHeight*0.45
 	sceneGroup:insert(a2_soldOut)
-	a2_soldOut.alpha=loadedItem.a2Sold
+	if loadedClothes.a2Sold==0 then 
+		a2_soldOut.alpha=1
+	else 
+		a2_soldOut.alpha=0
+	end
 
 	local a3_soldOut = display.newImageRect("image/상점/soldout.png",135,135)
 	a3_soldOut.x,a3_soldOut.y = display.contentWidth*0.5,display.contentHeight*0.45
 	sceneGroup:insert(a3_soldOut)
-	a3_soldOut.alpha=loadedItem.a3Sold
+	if loadedClothes.a3Sold==0 then 
+		a3_soldOut.alpha=1
+	else 
+		a3_soldOut.alpha=0
+	end
 
 	local a4_soldOut = display.newImageRect("image/상점/soldout.png",135,135)
 	a4_soldOut.x,a4_soldOut.y = display.contentWidth*0.67,display.contentHeight*0.45
 	sceneGroup:insert(a4_soldOut)
-	a4_soldOut.alpha=loadedItem.a4Sold
+	if loadedClothes.a4Sold==0 then 
+		a4_soldOut.alpha=1
+	else 
+		a4_soldOut.alpha=0
+	end
 
 	local a5_soldOut = display.newImageRect("image/상점/soldout.png",135,135)
 	a5_soldOut.x,a5_soldOut.y = display.contentWidth*0.85,display.contentHeight*0.45
 	sceneGroup:insert(a5_soldOut)
-	a5_soldOut.alpha=loadedItem.a5Sold
+	if loadedClothes.a5Sold==0 then 
+		a5_soldOut.alpha=1
+	else 
+		a5_soldOut.alpha=0
+	end
 
 
 	local t1_soldOut = display.newImageRect("image/상점/soldout.png",135,135)
 	t1_soldOut.x,t1_soldOut.y = display.contentWidth*0.15,display.contentHeight*0.75
 	sceneGroup:insert(t1_soldOut)
-	t1_soldOut.alpha=loadedItem.t1Sold
+	if loadedClothes.t1Sold==0 then 
+		t1_soldOut.alpha=1
+	else 
+		t1_soldOut.alpha=0
+	end
 
 	local t2_soldOut = display.newImageRect("image/상점/soldout.png",135,135)
 	t2_soldOut.x,t2_soldOut.y = display.contentWidth*0.33,display.contentHeight*0.75
 	sceneGroup:insert(t2_soldOut)
-	t2_soldOut.alpha=loadedItem.t2Sold
+	if loadedClothes.t2Sold==0 then 
+		t2_soldOut.alpha=1
+	else 
+		t2_soldOut.alpha=0
+	end
 
 	local t3_soldOut = display.newImageRect("image/상점/soldout.png",135,135)
 	t3_soldOut.x,t3_soldOut.y = display.contentWidth*0.5,display.contentHeight*0.75
 	sceneGroup:insert(t3_soldOut)
-	t3_soldOut.alpha=loadedItem.t3Sold
+	if loadedClothes.t3Sold==0 then 
+		t3_soldOut.alpha=1
+	else 
+		t3_soldOut.alpha=0
+	end
 
 	local t4_soldOut = display.newImageRect("image/상점/soldout.png",135,135)
 	t4_soldOut.x,t4_soldOut.y = display.contentWidth*0.67,display.contentHeight*0.75
 	sceneGroup:insert(t4_soldOut)
-	t4_soldOut.alpha=loadedItem.t4Sold
+	if loadedClothes.t4Sold==0 then 
+		t4_soldOut.alpha=1
+	else 
+		t4_soldOut.alpha=0
+	end
 
 	local t5_soldOut = display.newImageRect("image/상점/soldout.png",135,135)
 	t5_soldOut.x,t5_soldOut.y = display.contentWidth*0.85,display.contentHeight*0.75
 	sceneGroup:insert(t5_soldOut)
-	t5_soldOut.alpha=loadedItem.t5Sold
+	if loadedClothes.t5Sold==0 then 
+		t5_soldOut.alpha=1
+	else 
+		t5_soldOut.alpha=0
+	end
+
 
 
 
@@ -393,8 +485,6 @@ function scene:create( event )
 		selectItem14.alpha=1
 	elseif item=="twopiece5" then
 		selectItem15.alpha=1
-	else
-		selectItem1.alpha=1
 	end
 
 
@@ -429,131 +519,131 @@ function scene:create( event )
 
 	 local function buy_popup(event)
 	 		if loadedSetting.money-money>=0 then
-	 						loadedItem.cloCount=loadedItem.cloCount+1
+	 						loadedClothes.cloCount=loadedClothes.cloCount+1
 
-	 						if loadedItem.cloCount == 1 then
-						loadedItem.clothes1 = item
-					elseif loadedItem.cloCount == 2 then
-						loadedItem.clothes2 = item
-					elseif loadedItem.cloCount == 3 then
-						loadedItem.clothes3 = item
-					elseif loadedItem.cloCount == 4 then
-						loadedItem.clothes4 = item
-					elseif loadedItem.cloCount == 5 then
-						loadedItem.clothes5 = item
-					elseif loadedItem.cloCount == 6 then
-						loadedItem.clothes6 = item
-					elseif loadedItem.cloCount == 7 then
-						loadedItem.clothes7 = item
-					elseif loadedItem.cloCount == 8 then
-						loadedItem.clothes8 = item
-					elseif loadedItem.cloCount == 9 then
-						loadedItem.clothes9 = item
-					elseif loadedItem.cloCount == 10 then
-						loadedItem.clothes10 = item
-					elseif loadedItem.cloCount == 11 then
-						loadedItem.clothes11 = item
-					elseif loadedItem.cloCount == 12 then
-						loadedItem.clothes12 = item
-					elseif loadedItem.cloCount == 13 then
-						loadedItem.clothes13 = item
-					elseif loadedItem.cloCount == 14 then
-						loadedItem.clothes14 = item
-					elseif loadedItem.cloCount == 15 then
-						loadedItem.clothes15 = item
+	 						if loadedClothes.cloCount == 1 then
+						loadedClothes.clothes1 = item
+					elseif loadedClothes.cloCount == 2 then
+						loadedClothes.clothes2 = item
+					elseif loadedClothes.cloCount == 3 then
+						loadedClothes.clothes3 = item
+					elseif loadedClothes.cloCount == 4 then
+						loadedClothes.clothes4 = item
+					elseif loadedClothes.cloCount == 5 then
+						loadedClothes.clothes5 = item
+					elseif loadedClothes.cloCount == 6 then
+						loadedClothes.clothes6 = item
+					elseif loadedClothes.cloCount == 7 then
+						loadedClothes.clothes7 = item
+					elseif loadedClothes.cloCount == 8 then
+						loadedClothes.clothes8 = item
+					elseif loadedClothes.cloCount == 9 then
+						loadedClothes.clothes9 = item
+					elseif loadedClothes.cloCount == 10 then
+						loadedClothes.clothes10 = item
+					elseif loadedClothes.cloCount == 11 then
+						loadedClothes.clothes11 = item
+					elseif loadedClothes.cloCount == 12 then
+						loadedClothes.clothes12 = item
+					elseif loadedClothes.cloCount == 13 then
+						loadedClothes.clothes13 = item
+					elseif loadedClothes.cloCount == 14 then
+						loadedClothes.clothes14 = item
+					elseif loadedClothes.cloCount == 15 then
+						loadedClothes.clothes15 = item
 					end
 
 					--옷 수량 체크
 					if (item=="gwajam1") or (item=="gwajam2") or (item=="gwajam3") or (item=="gwajam4") or (item=="gwajam5") then
-						loadedItem.gwajamCount=loadedItem.gwajamCount+1
-						if loadedItem.gwajamCount==1 then
-							loadedItem.gwajam1=item
-						elseif loadedItem.gwajamCount==2 then
-							loadedItem.gwajam2=item
-						elseif loadedItem.gwajamCount==3 then
-							loadedItem.gwajam3=item
-						elseif loadedItem.gwajamCount==4 then 
-							loadedItem.gwajam4=item
-						elseif loadedItem.gwajamCount==5 then
-							loadedItem.gwajam5=item
+						loadedClothes.gwajamCount=loadedClothes.gwajamCount+1
+						if loadedClothes.gwajamCount==1 then
+							loadedClothes.gwajam1=item
+						elseif loadedClothes.gwajamCount==2 then
+							loadedClothes.gwajam2=item
+						elseif loadedClothes.gwajamCount==3 then
+							loadedClothes.gwajam3=item
+						elseif loadedClothes.gwajamCount==4 then 
+							loadedClothes.gwajam4=item
+						elseif loadedClothes.gwajamCount==5 then
+							loadedClothes.gwajam5=item
 						end
 					end
 					if (item=="animal1") or (item=="animal2") or (item=="animal3") or (item=="animal4") or (item=="animal5") then
-						loadedItem.animalCount=loadedItem.animalCount+1
-						if loadedItem.animalCount==1 then
-							loadedItem.animal1=item
-						elseif loadedItem.animalCount==2 then
-							loadedItem.animal2=item
-						elseif loadedItem.animalCount==3 then
-							loadedItem.animal3=item
-						elseif loadedItem.animalCount==4 then
-							loadedItem.animal4=item
-						elseif loadedItem.animalCount==5 then
-							loadedItem.animal5=item
+						loadedClothes.animalCount=loadedClothes.animalCount+1
+						if loadedClothes.animalCount==1 then
+							loadedClothes.animal1=item
+						elseif loadedClothes.animalCount==2 then
+							loadedClothes.animal2=item
+						elseif loadedClothes.animalCount==3 then
+							loadedClothes.animal3=item
+						elseif loadedClothes.animalCount==4 then
+							loadedClothes.animal4=item
+						elseif loadedClothes.animalCount==5 then
+							loadedClothes.animal5=item
 						end
 					end
 					if (item=="twopiece1") or (item=="twopiece2") or (item=="twopiece3") or (item=="twopiece4") or (item=="twopiece5") then
-						loadedItem.twopieceCount=loadedItem.twopieceCount+1
-						if loadedItem.twopieceCount==1 then
-							loadedItem.twopiece1=item
-						elseif loadedItem.twopieceCount==2 then
-							loadedItem.twopiece2=item
-						elseif loadedItem.twopieceCount==3 then
-							loadedItem.twopiece3=item
-						elseif loadedItem.twopieceCount==4 then
-							loadedItem.twopiece4=item
-						elseif loadedItem.twopieceCount==5 then
-							loadedItem.twopiece5=item
+						loadedClothes.twopieceCount=loadedClothes.twopieceCount+1
+						if loadedClothes.twopieceCount==1 then
+							loadedClothes.twopiece1=item
+						elseif loadedClothes.twopieceCount==2 then
+							loadedClothes.twopiece2=item
+						elseif loadedClothes.twopieceCount==3 then
+							loadedClothes.twopiece3=item
+						elseif loadedClothes.twopieceCount==4 then
+							loadedClothes.twopiece4=item
+						elseif loadedClothes.twopieceCount==5 then
+							loadedClothes.twopiece5=item
 						end
 					end
 
 					--판매소진
 	         if item=="gwajam1" then
-	            loadedItem.g1Sold=1          
+	            loadedClothes.g1Sold=0        
 	         end
 	         if item=="gwajam2" then
-	            loadedItem.g2Sold=1         
+	            loadedClothes.g2Sold=0         
 	         end
 	         if item=="gwajam3" then
-	            loadedItem.g3Sold=1           
+	            loadedClothes.g3Sold=0           
 	         end
 	         if item=="gwajam4" then
-	            loadedItem.g4Sold=1          
+	            loadedClothes.g4Sold=0          
 	         end
 	         if item=="gwajam5" then
-	            loadedItem.g5Sold=1            
+	            loadedClothes.g5Sold=0            
 	         end
 
 	         if item=="animal1" then
-	            loadedItem.a1Sold=1           
+	            loadedClothes.a1Sold=0          
 	         end
 	         if item=="animal2" then
-	            loadedItem.a2Sold=1            
+	            loadedClothes.a2Sold=0           
 	         end
 	         if item=="animal3" then
-	            loadedItem.a3Sold=1            
+	            loadedClothes.a3Sold=0           
 	         end
 	         if item=="animal4" then
-	            loadedItem.a4Sold=1         
+	            loadedClothes.a4Sold=0        
 	         end
 	         if item=="animal5" then
-	            loadedItem.a5Sold=1          
+	            loadedClothes.a5Sold=0         
 	         end
 
 	         if item=="twopiece1" then
-	            loadedItem.t1Sold=1            
+	            loadedClothes.t1Sold=0           
 	         end
 	         if item=="twopiece2" then
-	            loadedItem.t2Sold=1            
+	            loadedClothes.t2Sold=0           
 	         end
 	         if item=="twopiece3" then
-	            loadedItem.t3Sold=1            
+	            loadedClothes.t3Sold=0           
 	         end
 	         if item=="twopiece4" then
-	            loadedItem.t4Sold=1          
+	            loadedClothes.t4Sold=0         
 	         end
 	         if item=="twopiece5" then
-	            loadedItem.t5Sold=1            
+	            loadedClothes.t5Sold=0           
 	         end
 			 S1.alpha=0
 			 S2text.alpha=0
@@ -564,7 +654,7 @@ function scene:create( event )
 
 			 loadedSetting.money=loadedSetting.money-money
 			 loadsave.saveTable(loadedSetting,"settings.json")
-			 loadsave.saveTable(loadedItem,"clothes.json")
+			 loadsave.saveTable(loadedClothes,"clothes.json")
 				else
 				 S1.alpha=0
 				 S2text.alpha=0
