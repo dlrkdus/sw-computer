@@ -92,21 +92,21 @@ function scene:create( event )
 	            animalCount=0,
 	            twopieceCount=0,
 
-	            g1Sold=1,
-	            g2Sold=1,
-	            g3Sold=1,
-	            g4Sold=1,
-	            g5Sold=1,
-	            a1Sold=1,
-	            a2Sold=1,
-	            a3Sold=1,
-	            a4Sold=1,
-	            a5Sold=1,
-	            t1Sold=1,
-	            t2Sold=1,
-	            t3Sold=1,
-	            t4Sold=1,
-	            t5Sold=1,
+	            g1Sold=0,
+	            g2Sold=0,
+	            g3Sold=0,
+	            g4Sold=0,
+	            g5Sold=0,
+	            a1Sold=0,
+	            a2Sold=0,
+	            a3Sold=0,
+	            a4Sold=0,
+	            a5Sold=0,
+	            t1Sold=0,
+	            t2Sold=0,
+	            t3Sold=0,
+	            t4Sold=0,
+	            t5Sold=0,
 
 	            clo1="과잠_1",
 	            clo2="과잠_2",
@@ -125,6 +125,24 @@ function scene:create( event )
 	            clo15="투피스_5",
 
 	            cloCount=0,
+
+	            gwajam1="",
+	            gwajam2="",
+	            gwajam3="",
+	            gwajam4="",
+	            gwajam5="",
+
+	            animal1="",
+	            animal2="",
+	            animal3="",
+	            animal4="",
+	            animal5="",
+
+	            twopiece1="",
+	            twopiece2="",
+	            twopiece3="",
+	            twopiece4="",
+	            twopiece5="",
 
 	            clothes1="",
 	            clothes2="",
@@ -236,7 +254,7 @@ function scene:create( event )
 	function gotoMain( event )
 		audio.pause( backgroundMusicChannel )
 		composer.removeScene("intro")
-		composer.gotoScene( "가방_음식" )
+		composer.gotoScene( "메인화면" )
 	end
 
 	function inputEvent( event )
