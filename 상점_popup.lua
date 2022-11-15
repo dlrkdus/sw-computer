@@ -156,6 +156,15 @@ function scene:create( event )
 		selectItem1.alpha=1
 	end
 
+	local exit = display.newImageRect("image/상점/화살표_왼.png",80,140)
+	exit.x,exit.y = display.contentWidth*0.05,display.contentHeight*0.1
+	sceneGroup:insert(exit)
+
+	local exitText = display.newText("나가기",display.contentWidth*0.05,display.contentHeight*0.2)
+	exitText:setFillColor(0)
+	exitText.size =40
+	sceneGroup:insert(exitText)
+
 
 	local S1=display.newRect(display.contentWidth*0.41, display.contentHeight*0.69,150,70)
 	S1:setFillColor(0)

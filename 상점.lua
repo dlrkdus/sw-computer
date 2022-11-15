@@ -102,6 +102,21 @@ function scene:create( event )
 	next.x,next.y = display.contentWidth*0.96,display.contentHeight*0.5
 	sceneGroup:insert(next)
 
+	local exit = display.newImageRect("image/상점/화살표_왼.png",80,140)
+	exit.x,exit.y = display.contentWidth*0.05,display.contentHeight*0.1
+	sceneGroup:insert(exit)
+
+	local exitText = display.newText("나가기",display.contentWidth*0.05,display.contentHeight*0.2)
+	exitText:setFillColor(0)
+	exitText.size =40
+	sceneGroup:insert(exitText)
+
+	local function exitFunc(event)
+		composer.removeScene("상점")
+	   	composer.gotoScene("메인화면")
+	end
+	exit:addEventListener("tap",exitFunc)
+
 	--구매함수
 
 	local item
