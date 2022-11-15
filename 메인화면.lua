@@ -3,10 +3,12 @@
 -- 메인화면.lua
 --
 -----------------------------------------------------------------------------------------
-
 local composer = require( "composer" )
 local scene = composer.newScene()
-local widget = require( "widget" )
+local loadsave = require( "loadsave" )
+local json = require( "json" )
+local widget = require "widget"
+
 local buttonUI = {}
 local soundTable = {
 		bgSound = audio.loadSound( "bgm/main_bg.mp3" ),
@@ -15,7 +17,8 @@ local soundTable = {
 
 function scene:create( event )
 	local sceneGroup = self.view
-
+   local loadedClothes = loadsave.loadTable( "clothes.json" )
+   local loadedItems= loadsave.loadTable( "items.json" )
 	
 	local backgroundMusicChannel = audio.play( soundTable["bgSound"], {loops=-1} )
 	audio.setVolume( 2 )
@@ -31,68 +34,297 @@ function scene:create( event )
 	som.alpha = 1
 	sceneGroup:insert(som)
 
---과잠_1만 이 크기
-	  -- local clo = display.newImageRect("image/옷/과잠_1.png", 600, 355)
-   --    clo.x, clo.y = display.contentWidth/2 - 37, 405
-   --  clo:scale( -1, 1 )
+ local clo1 = display.newImageRect("image/옷/과잠_1.png", 600, 355)
+    clo1.x, clo1.y = display.contentWidth/2 - 37, 405
+    clo1:scale( -1, 1 )
+    if loadedClothes.clo1_apply == 1 then 
+       clo1.alpha=1
+    else
+       clo1.alpha=0
+    end
 
---2-5과잠
-   -- local clo = display.newImageRect("image/옷/과잠_5.png", 605, 355)
-   --    clo.x, clo.y = display.contentWidth/2 - 41, 405
-   --  clo:scale( -1, 1 )
+    local clo2 = display.newImageRect("image/옷/과잠_2.png", 605, 355)
+    clo2.x, clo2.y = display.contentWidth/2 - 41, 405
+    clo2:scale( -1, 1 )
+    if loadedClothes.clo2_apply == 1 then 
+       clo2.alpha=1
+    else
+       clo2.alpha = 0
+    end
 
---동물 1-3, 5
-	-- local clo2 = display.newImageRect("image/옷/동물_5.png", 208, 178)
- --    clo2.x, clo2.y = display.contentWidth/2, 504
- --    clo2:scale( -1, 1 )    
+    local clo3 = display.newImageRect("image/옷/과잠_3.png", 605, 355)
+    clo3.x, clo3.y = display.contentWidth/2 - 41, 405
+    clo3:scale( -1, 1 )
+    if loadedClothes.clo3_apply == 1 then 
+       clo3.alpha=1
+    else
+       clo3.alpha = 0
+    end
 
---동물_4
-	-- local clo2 = display.newImageRect("image/옷/동물_4.png", 208, 165)
- --    clo2.x, clo2.y = display.contentWidth/2, 514
- --    clo2:scale( -1, 1 )    
+    local clo4 = display.newImageRect("image/옷/과잠_4.png", 605, 355)
+    clo4.x, clo4.y = display.contentWidth/2 - 41, 405
+    clo4:scale( -1, 1 )
+    if loadedClothes.clo4_apply == 1 then 
+       clo4.alpha=1
+    else
+       clo4.alpha = 0
+    end
 
--- --원피스 다
---     local clo3 = display.newImageRect("image/옷/투피스_5.png", 435, 373)
---     clo3.x, clo3.y = display.contentWidth/2 -77, 390
---     clo3:scale( -1, 1 ) 
+    local clo5 = display.newImageRect("image/옷/과잠_5.png", 605, 355)
+    clo5.x, clo5.y = display.contentWidth/2 - 41, 405
+    clo5:scale( -1, 1 )
+    if loadedClothes.clo5_apply == 1 then 
+       clo5.alpha=1
+    else
+       clo5.alpha = 0
+    end
 
---local ribbon = display.newImageRect("image/아이템/리본_2.png", 160, 120)
-  --  ribbon.x, ribbon.y = display.contentWidth/2 + 50, 270
-   --ribbon.rotation = 10
+   local anm1 = display.newImageRect("image/옷/동물_1.png", 208, 178)
+    anm1.x, anm1.y = display.contentWidth/2, 504
+    anm1:scale( -1, 1 )    
+    if loadedClothes.clo6_apply == 1 then 
+       anm1.alpha=1
+    else
+       anm1.alpha = 0
+    end
 
-    local gl = display.newImageRect("image/아이템/안경_3.png", 73, 35)
-    gl.x, gl.y = display.contentWidth/2-1.2, 337.5
-     gl:scale( -1, 1 ) 
-     gl.rotation = 357
-    sceneGroup:insert(gl)
+   local anm2 = display.newImageRect("image/옷/동물_2.png", 208, 178)
+    anm2.x, anm2.y = display.contentWidth/2, 504
+    anm2:scale( -1, 1 )      
+    if loadedClothes.clo7_apply == 1 then 
+       anm2.alpha=1
+    else
+       anm2.alpha = 0
+    end 
 
---모자_1
-    -- local h = display.newImageRect("image/아이템/모자_1.png", 180, 90)
-    -- h.x, h.y = display.contentWidth/2 - 70, 260
-    --  h.rotation = 320
+   local anm3 = display.newImageRect("image/옷/동물_3.png", 208, 178)
+    anm3.x, anm3.y = display.contentWidth/2, 504
+    anm3:scale( -1, 1 )  
+    if loadedClothes.clo8_apply == 1 then 
+       anm3.alpha=1
+    else
+       anm3.alpha = 0
+    end   
 
-    -- --모자_2
-    --  local h = display.newImageRect("image/아이템/모자_2.png", 170, 115)
-    -- h.x, h.y = display.contentWidth/2 - 70, 270
-    --  h.rotation = 290
+   local anm4 = display.newImageRect("image/옷/동물_4.png", 208, 165)
+    anm4.x, anm4.y = display.contentWidth/2, 514
+    anm4:scale( -1, 1 )    
+    if loadedClothes.clo9_apply == 1 then 
+       anm4.alpha=1
+    else
+       anm4.alpha = 0
+    end 
 
---모자3_6
+   local anm5 = display.newImageRect("image/옷/동물_5.png", 208, 178)
+    anm5.x, anm5.y = display.contentWidth/2, 504
+    anm5:scale( -1, 1 )   
+    if loadedClothes.clo10_apply == 1 then 
+       anm5.alpha=1
+    else
+       anm5.alpha = 0
+    end  
 
---     local h = display.newImageRect("image/아이템/모자_6.png", 140, 75)
---    h.x, h.y = display.contentWidth/2+30, 245
---     h:scale( -1, 1 ) 
---     h.rotation = 10
+    local opc1 = display.newImageRect("image/옷/투피스_1.png", 435, 373)
+    opc1.x, opc1.y = display.contentWidth/2 -77, 390
+    opc1:scale( -1, 1 ) 
+    if loadedClothes.clo11_apply == 1 then 
+       opc1.alpha=1
+    else
+       opc1.alpha = 0
+    end  
+
+    local opc2 = display.newImageRect("image/옷/투피스_2.png", 435, 373)
+    opc2.x, opc2.y = display.contentWidth/2 -77, 390
+    opc2:scale( -1, 1 ) 
+    if loadedClothes.clo12_apply == 1 then 
+       opc2.alpha=1
+    else
+       opc2.alpha = 0
+    end  
+
+    local opc3 = display.newImageRect("image/옷/투피스_3.png", 435, 373)
+    opc3.x, opc3.y = display.contentWidth/2 -77, 390
+    opc3:scale( -1, 1 ) 
+    if loadedClothes.clo1_apply == 1 then 
+       opc3.alpha=1
+    else
+       opc3.alpha = 0
+    end  
+
+    local opc4 = display.newImageRect("image/옷/투피스_4.png", 435, 373)
+    opc4.x, opc4.y = display.contentWidth/2 -77, 390
+    opc4:scale( -1, 1 ) 
+    if loadedClothes.clo1_apply == 1 then 
+       opc4.alpha=1
+    else
+       opc4.alpha = 0
+    end  
+
+    local opc5 = display.newImageRect("image/옷/투피스_5.png", 435, 373)
+    opc5.x, opc5.y = display.contentWidth/2 -77, 390
+    opc5:scale( -1, 1 ) 
+    if loadedClothes.clo13_apply == 1 then 
+       opc5.alpha=1
+    else
+       opc5.alpha = 0
+    end  
+
+   -- local rb1 = display.newImageRect("image/아이템/리본_1.png", 160, 120)
+   -- rb1.x, rb1.y = display.contentWidth/2 + 50, 270
+   -- rb1.rotation = 10
+   --  if loadedItems.item1_apply == 1 then 
+   --     rb1.alpha=1
+   --  else
+   --     rb1.alpha = 0
+   --  end  
+
+   -- local rb2 = display.newImageRect("image/아이템/리본_2.png", 160, 120)
+   -- rb2.x, rb2.y = display.contentWidth/2 + 50, 270
+   -- rb2.rotation = 10
+   --  if loadedItems.item2_apply == 1 then 
+   --     rb2.alpha=1
+   --  else
+   --     rb2.alpha = 0
+   --  end  
+
+   --  local gl = display.newImageRect("image/아이템/안경_1.png", 73, 35)
+   --  gl.x, gl.y = display.contentWidth/2-1.2, 337.5
+   --   gl:scale( -1, 1 ) 
+   --   gl.rotation = 357
+   --  if loadedItems.item9_apply == 1 then 
+   --     gl.alpha=1
+   --  else
+   --     gl.alpha = 0
+   --  end  
+
+   --  local gl2 = display.newImageRect("image/아이템/안경_2.png", 73, 35)
+   --  gl2.x, gl2.y = display.contentWidth/2-1.2, 337.5
+   --  gl2:scale( -1, 1 ) 
+   --  gl2.rotation = 357
+   --  if loadedItems.item10_apply == 1 then 
+   --     gl2.alpha=1
+   --  else
+   --     gl2.alpha = 0
+   --  end  
+
+   --  local gl3 = display.newImageRect("image/아이템/안경_3.png", 73, 35)
+   --  gl3.x, gl3.y = display.contentWidth/2-1.2, 337.5
+   --   gl3:scale( -1, 1 ) 
+   --   gl3.rotation = 357
+   --  if loadedItems.item11_apply == 1 then 
+   --     gl3.alpha=1
+   --  else
+   --     gl3.alpha = 0
+   --  end  
+
+   --  local h1 = display.newImageRect("image/아이템/모자_1.png", 180, 90)
+   --  h1.x, h1.y = display.contentWidth/2 - 70, 260
+   --   h1.rotation = 320
+   --  if loadedItems.item3_apply == 1 then 
+   --     h1.alpha=1
+   --  else
+   --     h1.alpha = 0
+   --  end  
+
+   --   local h2 = display.newImageRect("image/아이템/모자_2.png", 170, 115)
+   --  h2.x, h2.y = display.contentWidth/2 - 70, 270
+   --   h2.rotation = 290
+   --  if loadedItems.item4_apply == 1 then 
+   --     h2.alpha=1
+   --  else
+   --     h2.alpha = 0
+   --  end  
+
+   --  local h3 = display.newImageRect("image/아이템/모자_3.png", 140, 75)
+   -- h3.x, h3.y = display.contentWidth/2+30, 245
+   --  h3:scale( -1, 1 ) 
+   --  h3.rotation = 10
+   --  if loadedItems.item5_apply == 1 then 
+   --     h3.alpha=1
+   --  else
+   --     h3.alpha = 0
+   --  end  
  
-  --   local h3= display.newImageRect("image/아이템/왕관_2.png", 70, 55)
-  --   h3.x, h3.y = display.contentWidth/2 + 30, 245
-   --  h3.rotation = 20
+   --  local h4 = display.newImageRect("image/아이템/모자_4.png", 140, 75)
+   -- h4.x, h4.y = display.contentWidth/2+30, 245
+   --  h4:scale( -1, 1 ) 
+   --  h4.rotation = 10
+   --  if loadedItems.item6_apply == 1 then 
+   --     h4.alpha=1
+   --  else
+   --     h4.alpha = 0
+   --  end  
+ 
+   --  local h5 = display.newImageRect("image/아이템/모자_5.png", 140, 75)
+   -- h5.x, h5.y = display.contentWidth/2+30, 245
+   --  h5:scale( -1, 1 ) 
+   --  h5.rotation = 10
+   --  if loadedItems.item7_apply == 1 then 
+   --     h5.alpha=1
+   --  else
+   --     h5.alpha = 0
+   --  end  
+ 
+   --  local h6 = display.newImageRect("image/아이템/모자_6.png", 140, 75)
+   -- h6.x, h6.y = display.contentWidth/2+30, 245
+   --  h6:scale( -1, 1 ) 
+   --  h6.rotation = 10
+   --  if loadedItems.item8_apply == 1 then 
+   --     h6.alpha=1
+   --  else
+   --     h6.alpha = 0
+   --  end  
+ 
+   --  local crn= display.newImageRect("image/아이템/왕관_1.png", 70, 55)
+   --  crn.x, crn.y = display.contentWidth/2 + 30, 245
+   --  crn.rotation = 20
+   --  if loadedItems.item12_apply == 1 then 
+   --     crn.alpha=1
+   --  else
+   --     crn.alpha = 0
+   --  end  
 
-     --  local h4= display.newImageRect("image/아이템/잎_1.png", 60, 60)
-    --    h4.x, h4.y = display.contentWidth/2 + 85, 255
+   --  local crn2= display.newImageRect("image/아이템/왕관_2.png", 70, 55)
+   --  crn2.x, crn2.y = display.contentWidth/2 + 30, 245
+   --  crn2.rotation = 20
+   --  if loadedItems.item13_apply == 1 then 
+   --     crn2.alpha=1
+   --  else
+   --     crn2.alpha = 0
+   --  end  
 
-    local h5= display.newImageRect("image/아이템/헤드셋_1.png", 245, 140)
-    h5.x, h5.y = display.contentWidth/2, 300
-    sceneGroup:insert(h5)
+   --  local lf= display.newImageRect("image/아이템/잎_1.png", 60, 60)
+   --  lf.x, lf.y = display.contentWidth/2 + 85, 255
+   --  if loadedItems.item14_apply == 1 then 
+   --     lf.alpha=1
+   --  else
+   --     lf.alpha = 0
+   --  end  
+
+   --  local lf2= display.newImageRect("image/아이템/잎_2.png", 60, 60)
+   --  lf2.x, lf2.y = display.contentWidth/2 + 85, 255
+   --  if loadedItems.item15_apply == 1 then 
+   --     lf2.alpha=1
+   --  else
+   --     lf2.alpha = 0
+   --  end  
+
+   --  local hd= display.newImageRect("image/아이템/헤드셋_1.png", 245, 140)
+   --  hd.x, hd.y = display.contentWidth/2, 300
+   --  if loadedItems.item16_apply == 1 then 
+   --     hd.alpha=1
+   --  else
+   --     hd.alpha = 0
+   --  end  
+
+   --  local hd2= display.newImageRect("image/아이템/헤드셋_2.png", 245, 140)
+   --  hd2.x, hd2.y = display.contentWidth/2, 300
+   --  if loadedItems.item17_apply == 1 then 
+   --     hd2.alpha=1
+   --  else
+   --     hd2.alpha = 0
+   --  end  
+
 
 	local cloud = display.newImageRect("image/메인/cloud.png", 200, 200)
 	cloud.x = 150
