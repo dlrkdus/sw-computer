@@ -9,11 +9,15 @@ local composer = require( "composer" )
 local scene = composer.newScene()
 local json = require( "json" ) 
 
-local loadedSettings = loadsave.loadTable( "setting.json" )
+local loadedSettings = loadsave.loadTable( "settings.json" )
 local loadedItems= loadsave.loadTable( "items.json" )
 
 function scene:create( event )
 	local sceneGroup = self.view
+
+	local soundEffect = audio.loadSound( "bgm/game_win.mp3" )
+	local backgroundMusicChannel = audio.play( soundEffect, {loops=0} )
+	audio.setVolume( 2 )
 
 	local background= display.newImageRect("image/숨은그림찾기/white.png",1280,720)
 	background.x,background.y = display.contentWidth/2,display.contentHeight/2
@@ -27,6 +31,21 @@ function scene:create( event )
 	local somsom = display.newImageRect("image/숨은그림찾기/솜솜이_성공.png",700,700)
 	somsom.x,somsom.y = display.contentWidth*0.84,display.contentHeight*0.6
 	sceneGroup:insert(somsom)
+
+	local exit = display.newImageRect("image/상점/화살표_왼.png",80,140)
+	exit.x,exit.y = display.contentWidth*0.05,display.contentHeight*0.1
+	sceneGroup:insert(exit)
+
+	local exitText = display.newText("나가기",display.contentWidth*0.05,display.contentHeight*0.2)
+	exitText:setFillColor(0)
+	exitText.size =40
+	sceneGroup:insert(exitText)
+
+	local function exitFunc(event)
+		composer.removeScene("상점")
+	   	composer.gotoScene("메인화면")
+	end
+	exit:addEventListener("tap",exitFunc)
 
 	local t= display.newImageRect("image/숨은그림찾기/테두리.png",750,750)
 	t.x,t.y = display.contentWidth/2,display.contentHeight/2

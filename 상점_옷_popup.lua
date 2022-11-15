@@ -22,12 +22,7 @@ function scene:create( event )
 	background.x,background.y = display.contentWidth/2,display.contentHeight/2
 	sceneGroup:insert(background)
 
-	--돈
-	local m = loadedItem.money
-	local showLimit = display.newText(m,display.contentWidth*0.85,display.contentHeight*0.2)
-	showLimit:setFillColor(0)
-	showLimit.size =40
-	sceneGroup:insert(showLimit)
+
 
 
 	--옷

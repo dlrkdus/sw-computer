@@ -8,11 +8,15 @@ local loadsave = require( "loadsave" )
 local composer = require( "composer" )
 local json = require( "json" )
 local scene = composer.newScene()
-local loadedItem= loadsave.loadTable( "setting.json" )
+local loadedSettings= loadsave.loadTable( "settings.json" )
 
 function scene:create( event )
 	local sceneGroup = self.view
 	
+	local soundEffect = audio.loadSound( "bgm/store_bg.mp3" )
+	local backgroundMusicChannel = audio.play( soundEffect, {loops=-1} )
+	audio.setVolume( 2 )
+
 
 	local background= display.newImageRect("image/숨은그림찾기/white.png",1280,720)
 	background.x,background.y = display.contentWidth/2,display.contentHeight/2
@@ -20,7 +24,7 @@ function scene:create( event )
 
 
 	--돈
-	local m = loadedItem.money
+	local m = "money:  "..loadedSettings.money
 	local showLimit = display.newText(m,display.contentWidth*0.85,display.contentHeight*0.2)
 	showLimit:setFillColor(0)
 	showLimit.size =40
@@ -97,6 +101,21 @@ function scene:create( event )
 	local next = display.newImageRect("image/상점/화살표.png",80,140)
 	next.x,next.y = display.contentWidth*0.96,display.contentHeight*0.5
 	sceneGroup:insert(next)
+
+	local exit = display.newImageRect("image/상점/화살표_왼.png",80,140)
+	exit.x,exit.y = display.contentWidth*0.05,display.contentHeight*0.1
+	sceneGroup:insert(exit)
+
+	local exitText = display.newText("나가기",display.contentWidth*0.05,display.contentHeight*0.2)
+	exitText:setFillColor(0)
+	exitText.size =40
+	sceneGroup:insert(exitText)
+
+	local function exitFunc(event)
+		composer.removeScene("상점")
+	   	composer.gotoScene("메인화면")
+	end
+	exit:addEventListener("tap",exitFunc)
 
 	--구매함수
 

@@ -12,7 +12,7 @@ local loadedItem= loadsave.loadTable( "setting.json" )
 
 function scene:create( event )
 	local sceneGroup = self.view
-	
+
 
 	local background= display.newImageRect("image/숨은그림찾기/white.png",1280,720)
 	background.x,background.y = display.contentWidth/2,display.contentHeight/2
@@ -257,6 +257,7 @@ function scene:create( event )
 	twopiece5:addEventListener("touch",buy)
 
 	local function nextStore(event)
+		audio.pause( backgroundMusicChannel )
 		composer.removeScene("상점_옷")
 	   	composer.gotoScene("상점")
 	end

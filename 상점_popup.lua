@@ -8,12 +8,17 @@ local loadsave = require( "loadsave" )
 local composer = require( "composer" )
 local json = require( "json" )
 local scene = composer.newScene()
-local loadedSettings = loadsave.loadTable( "setting.json" )
+local loadedSettings = loadsave.loadTable( "settings.json" )
+local loadedFood=loadsave.loadTable("food.json")
 
 
 function scene:create( event )
 	local sceneGroup = self.view
 
+
+	local soundEffect = audio.loadSound( "bgm/store_bg.mp3" )
+	local backgroundMusicChannel = audio.play( soundEffect, {loops=-1} )
+	audio.setVolume( 2 )
 
 	local item=composer.getVariable("item", item)
 	local money=composer.getVariable("money", money)
@@ -152,7 +157,17 @@ function scene:create( event )
 		selectItem1.alpha=1
 	end
 
+	--나가기 버튼
+	local exit = display.newImageRect("image/상점/화살표_왼.png",80,140)
+	exit.x,exit.y = display.contentWidth*0.05,display.contentHeight*0.1
+	sceneGroup:insert(exit)
 
+	local exitText = display.newText("나가기",display.contentWidth*0.05,display.contentHeight*0.2)
+	exitText:setFillColor(0)
+	exitText.size =40
+	sceneGroup:insert(exitText)
+
+	--예 아니오 버튼
 	local S1=display.newRect(display.contentWidth*0.41, display.contentHeight*0.69,150,70)
 	S1:setFillColor(0)
 	sceneGroup:insert(S1)
@@ -183,23 +198,23 @@ function scene:create( event )
 	 local function buy_popup(event)
 	        if loadedSettings.money-money>=0 then
             if item=="tteokbokki" then
-               loadedSettings.tteokbokki_count=loadedSettings.tteokbokki_count+1            
+               loadedFood.tteokbokki_count=loadedFood.tteokbokki_count+1            
             end
 
             if item=="fishCake" then
-               loadedSettings.fishCake_count=loadedSettings.fishCake_count+1            
+               loadedFood.fishCake_count=loadedFood.fishCake_count+1            
             end
 
             if item=="sundae" then
-               loadedSettings.sundae_count=loadedSettings.sundae_count+1            
+               loadedFood.sundae_count=loadedFood.sundae_count+1            
             end
 
             if item=="steak" then
-               loadedSettings.steak_count=loadedSettings.steak_count+1            
+               loadedFood.steak_count=loadedFood.steak_count+1            
             end
 
             if item=="fried" then
-               loadedSettings.fried_count=loadedSettings.fried_count+1            
+               loadedFood.fried_count=loadedFood.fried_count+1            
             end
 			S1.alpha=0
 			S2text.alpha=0
@@ -209,7 +224,7 @@ function scene:create( event )
 			S3text.text="나가기"
 
             loadedSettings.money=loadedSettings.money-money
-			loadsave.saveTable(loadedSettings,"setting.json")
+			loadsave.saveTable(loadedSettings,"settings.json")
        		else
 				S1.alpha=0
 				S2text.alpha=0
@@ -227,6 +242,7 @@ function scene:create( event )
       S1:addEventListener("tap",buy_popup)
 
       local function popup_down(event)
+      	audio.pause( backgroundMusicChannel )
       	composer.removeScene("상점_popup")
         composer.gotoScene("상점")
        end
