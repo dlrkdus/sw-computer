@@ -254,7 +254,7 @@ function scene:create( event )
 	function gotoMain( event )
 		audio.pause( backgroundMusicChannel )
 		composer.removeScene("intro")
-		composer.gotoScene( "가방_옷" )
+		composer.gotoScene( "가방_음식" )
 	end
 
 	function inputEvent( event )
