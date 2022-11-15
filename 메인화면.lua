@@ -121,12 +121,12 @@ function scene:create( event )
 
 	function gotoPic( event )
 		audio.pause( backgroundMusicChannel )
-		composer.gotoScene( "숨은그림찾기_솜솜")
+		composer.gotoScene( "숨은그림찾기")
 	end
 
 	function gotoBal( event )
 		audio.pause( backgroundMusicChannel )
-		composer.gotoScene( "풍선터트리기_20초" ) 
+		composer.gotoScene( "풍선터트리기" ) 
 	end
 
 	function gotoRepo( event )
@@ -154,8 +154,22 @@ function scene:create( event )
         elseif event.target.name == "store" then
             --transition.to(buttonUI[4], {time = 500, alpha = 0})
             local t4 = timer.performWithDelay(1000, gotoStore, 1)
-             backgroundMusicChannel = audio.play( soundTable["storeSound"], {loops=0} )
-        end
+        elseif event.target.name == "question" then
+			local guideBg = display.newRect(display.contentCenterX, display.contentCenterY, 600, 400)
+			local guideText = display.newText(" ", display.contentWidth/2, display.contentHeight/ 2, "font/NanumJangMiCe.ttf", 30)
+			guideText:setFillColor(0)
+			guideText.text = "솜솜이 키우기\n\n오른쪽에 있는 미니게임으로 코인을 모으세요\n모은 코인으로 상점에서 음식을 구매해 솜솜이를 키워보세요!\n\n돋보기-숨은그림찾기\n솜-솜터트리기(미정)\n시험지-학점받기 "
+			local guideExit = display.newImage("image/메인/exit.png")
+			guideExit.x = guideBg.x + 260
+			guideExit.y = guideBg.y - 170
+
+			function exitGuide(event)
+				display.remove(guideBg)
+				display.remove(guideText)
+				display.remove(guideExit)
+			end
+			guideExit:addEventListener("tap", exitGuide)
+		end
     end
 
 	
@@ -196,6 +210,14 @@ function scene:create( event )
 	buttonUI[4].y = 450
 	buttonUI[4].name = "store"
 	sceneGroup:insert(buttonUI[4])
+
+	buttonUI[5] = widget.newButton(
+		{	defaultFile = "image/메인/question3.png", overFile = "image/메인/question3.png",
+			 onPress = inputEvent})
+	buttonUI[5].x = 30
+	buttonUI[5].y = 40
+	buttonUI[5].name = "question"
+	sceneGroup:insert(buttonUI[5])
 
    	
 end
