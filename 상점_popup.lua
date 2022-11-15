@@ -156,6 +156,7 @@ function scene:create( event )
 		selectItem1.alpha=1
 	end
 
+	--나가기 버튼
 	local exit = display.newImageRect("image/상점/화살표_왼.png",80,140)
 	exit.x,exit.y = display.contentWidth*0.05,display.contentHeight*0.1
 	sceneGroup:insert(exit)
@@ -165,7 +166,7 @@ function scene:create( event )
 	exitText.size =40
 	sceneGroup:insert(exitText)
 
-
+	--예 아니오 버튼
 	local S1=display.newRect(display.contentWidth*0.41, display.contentHeight*0.69,150,70)
 	S1:setFillColor(0)
 	sceneGroup:insert(S1)

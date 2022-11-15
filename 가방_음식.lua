@@ -1,178 +1,192 @@
 -----------------------------------------------------------------------------------------
 --
--- view2.lua
+-- view1.lua
 --
 -----------------------------------------------------------------------------------------
-local composer = require( "composer" )
-local scene = composer.newScene()
+
 local loadsave = require( "loadsave" )
+local composer = require( "composer" )
 local json = require( "json" )
+local scene = composer.newScene()
+local loadedItem= loadsave.loadTable( "setting.json" )
+local loadedFood=loadsave.loadTable("food.json")
 
 function scene:create( event )
 	local sceneGroup = self.view
-	local loadedSettings = loadsave.loadTable( "settings.json" )
-	local loadedItems= loadsave.loadTable( "items.json" )
-
-
-
-	local function go_back(event)
-		if event.phase == "began" then
-			composer.removeScene("가방_음식")
-			composer.gotoScene("메인화면")
-		end
-	end
 	
-	local function go_popup(event)
-		if event.phase == "began" then
-			composer.removeScene("가방_음식")
-			composer.gotoScene("가방_음식_popup")
-		end
-	end
+	local soundEffect = audio.loadSound( "bgm/store_bg.mp3" )
+	local backgroundMusicChannel = audio.play( soundEffect, {loops=-1} )
+	audio.setVolume( 2 )
 
 
-	local update = display.newImage("image/숨은그림찾기/white.png")
-	update.x, update.y = display.contentWidth*0.5, display.contentHeight*0.5
-	sceneGroup:insert(update)
-
-	local basic_button= display.newImage("image/상점/화살표.png")
-	basic_button.x, basic_button.y = display.contentWidth*0.3066, display.contentHeight*0.0774
-	basic_button.anchorX,basic_button.anchorY=0,0
-
-	sceneGroup:insert(basic_button)
-
-	local pretty_button= display.newImage("image/상점/화살표.png")
-	pretty_button.x, pretty_button.y = display.contentWidth*0.5, display.contentHeight*0.0774
-	sceneGroup:insert(pretty_button)
-	pretty_button.anchorX,pretty_button.anchorY=0,0
-	pretty_button:addEventListener("touch",go_popup)
+	local background= display.newImageRect("image/숨은그림찾기/white.png",1280,720)
+	background.x,background.y = display.contentWidth/2,display.contentHeight/2
+	sceneGroup:insert(background)
 
 
-	local exit = display.newImage("image/상점/화살표.png")
-	exit.x, exit.y = display.contentWidth*0.9207, display.contentHeight*0.0438
-	exit.anchorX, exit.anchorY = 0,0
+	--돈
+
+
+	local m = "money:  "..loadedItem.money
+	local showLimit = display.newText(m,display.contentWidth*0.85,display.contentHeight*0.2)
+	showLimit:setFillColor(0)
+	showLimit.size =40
+	sceneGroup:insert(showLimit)
+
+	print(loadedFood.tteokbokki_count)
 	
+
+	--음식
+	local tteokbokki = display.newImageRect("image/상점/떡볶이.jpeg",150,150)
+	tteokbokki.x,tteokbokki.y = display.contentWidth*0.15,display.contentHeight*0.4
+	sceneGroup:insert(tteokbokki)
+	tteokbokki.name="tteokbokki"
+	tteokbokki.id=500
+
+	local tCount = loadedFood.tteokbokki_count
+	local tCount = display.newText(tCount,display.contentWidth*0.21,display.contentHeight*0.3)
+	tCount:setFillColor(0)
+	tCount.size =30
+	sceneGroup:insert(tCount)
+
+	local fishCake = display.newImageRect("image/상점/어묵.jpeg",150,150)
+	fishCake.x,fishCake.y = display.contentWidth*0.33,display.contentHeight*0.4
+	sceneGroup:insert(fishCake)
+	fishCake.name="fishCake"
+	fishCake.id=500
+
+	local fcCount = loadedFood.fishCake_count
+	local fcCount = display.newText(fcCount,display.contentWidth*0.39,display.contentHeight*0.3)
+	fcCount:setFillColor(0)
+	fcCount.size =30
+	sceneGroup:insert(fcCount)
+
+	local sundae = display.newImageRect("image/상점/순대.jpeg",150,150)
+	sundae.x,sundae.y = display.contentWidth*0.5,display.contentHeight*0.4
+	sceneGroup:insert(sundae)
+	sundae.name="sundae"
+	sundae.id=500
+
+	local sdCount = loadedFood.sundae_count
+	local sdCount = display.newText(sdCount,display.contentWidth*0.56,display.contentHeight*0.3)
+	sdCount:setFillColor(0)
+	sdCount.size =30
+	sceneGroup:insert(sdCount)
+
+	local steak = display.newImageRect("image/상점/스테이크.jpeg",150,150)
+	steak.x,steak.y = display.contentWidth*0.67,display.contentHeight*0.4
+	sceneGroup:insert(steak)
+	steak.name="steak"
+	steak.id=500
+
+	local sCount = loadedFood.steak_count
+	local sCount = display.newText(sCount,display.contentWidth*0.73,display.contentHeight*0.3)
+	sCount:setFillColor(0)
+	sCount.size =30
+	sceneGroup:insert(sCount)
+
+	local fried = display.newImageRect("image/상점/튀김.jpeg",150,150)
+	fried.x,fried.y = display.contentWidth*0.85,display.contentHeight*0.4
+	sceneGroup:insert(fried)
+	fried.name="fried"
+	fried.id=500
+
+	local fCount = loadedFood.fried_count
+	local fCount = display.newText(fCount,display.contentWidth*0.91,display.contentHeight*0.3)
+	fCount:setFillColor(0)
+	fCount.size =30
+	sceneGroup:insert(fCount)
+
+
+
+
+	--가격
+
+	local tbk = 500
+	local showLimit = display.newText(tbk,display.contentWidth*0.15,display.contentHeight*0.55)
+	showLimit:setFillColor(0)
+	showLimit.size =40
+	sceneGroup:insert(showLimit)
+
+	local fc = 500
+	local showLimit = display.newText(fc,display.contentWidth*0.33,display.contentHeight*0.55)
+	showLimit:setFillColor(0)
+	showLimit.size =40
+	sceneGroup:insert(showLimit)
+
+	local sd = 500
+	local showLimit = display.newText(sd,display.contentWidth*0.5,display.contentHeight*0.55)
+	showLimit:setFillColor(0)
+	showLimit.size =40
+	sceneGroup:insert(showLimit)
+
+	local stk = 500
+	local showLimit = display.newText(stk,display.contentWidth*0.67,display.contentHeight*0.55)
+	showLimit:setFillColor(0)
+	showLimit.size =40
+	sceneGroup:insert(showLimit)
+
+	local fry = 500
+	local showLimit = display.newText(fry,display.contentWidth*0.85,display.contentHeight*0.55)
+	showLimit:setFillColor(0)
+	showLimit.size =40
+	sceneGroup:insert(showLimit)
+
+
+	local next = display.newImageRect("image/상점/화살표.png",80,140)
+	next.x,next.y = display.contentWidth*0.96,display.contentHeight*0.5
+	sceneGroup:insert(next)
+
+	local exit = display.newImageRect("image/상점/화살표_왼.png",80,140)
+	exit.x,exit.y = display.contentWidth*0.05,display.contentHeight*0.1
 	sceneGroup:insert(exit)
-	exit:addEventListener("touch",go_back)
 
-	local function click( event )
-		composer.setVariable("item",event.target.id)
-		composer.showOverlay( "가방_음식_popup",options)
+	local exitText = display.newText("나가기",display.contentWidth*0.05,display.contentHeight*0.2)
+	exitText:setFillColor(0)
+	exitText.size =40
+	sceneGroup:insert(exitText)
+
+	local function exitFunc(event)
+		composer.removeScene("상점")
+	   	composer.gotoScene("메인화면")
 	end
+	exit:addEventListener("tap",exitFunc)
 
-	--반복문 정리--
-	local function image( num )
-		if num == 1 then
-			local item1 = display.newImage("image/가방/" .. loadedItems.food1 .. ".png")
-			item1.x, item1.y =  display.contentWidth*0.0516, display.contentHeight*0.2818
-			item1.id = loadedItems.food1
-			item1.anchorX, item1.anchorY = 0,0
-			sceneGroup:insert(item1)
-			item1:addEventListener("touch", click)
-			if(loadedItems.item1Count > 1) then
-				--중복
-				local jungbok1 = display.newRect(30,30)
-				S1:setFillColor(1)
-				jungbok1.x, jungbok1.y =  display.contentWidth*0.1313, display.contentHeight*0.3019
-				sceneGroup:insert(jungbok1)
-				--중복 몇개?
-				local jungbok1Count = display.newText("",display.contentWidth*0.1307, display.contentHeight*0.3037)
-				jungbok1Count:setFillColor(0.9, 0.76, 0.83)
-				jungbok1Count.text = loadedItems.item1Count
-				jungbok1Count.size = 30
-				sceneGroup:insert(jungbok1Count)
-			end
-		elseif num == 2 then
-			local item2 = display.newImage("image/가방/" .. loadedItems.food2 .. ".png")
-			item2.x, item2.y =  display.contentWidth*0.1670, display.contentHeight*0.2818
-			item2.id = loadedItems.food2
-			item2.anchorX, item2.anchorY = 0,0
-			sceneGroup:insert(item2)
-			item2:addEventListener("touch", click)
-			if(loadedItems.item2Count > 1) then
-				--중복
-				local jungbok1 = display.newRect(30,30)
-				S1:setFillColor(1)
-				jungbok1.x, jungbok1.y =  display.contentWidth*0.1313, display.contentHeight*0.3019
-				sceneGroup:insert(jungbok1)
-				--중복 몇개?
-				local jungbok1Count = display.newText("",display.contentWidth*0.1307, display.contentHeight*0.3037)
-				jungbok1Count:setFillColor(0.9, 0.76, 0.83)
-				jungbok1Count.text = loadedItems.item1Count
-				jungbok1Count.size = 30
-				sceneGroup:insert(jungbok1Count)
-			end
-		elseif num == 3 then
-			local item3 = display.newImage("image/가방/" .. loadedItems.food3 .. ".png")
-			item3.x, item3.y =  display.contentWidth*0.2823, display.contentHeight*0.2818
-			sceneGroup:insert(item3)
-			item3.id = loadedItems.food3
-			item3.anchorX, item3.anchorY = 0,0
-			item3:addEventListener("touch", click)
-			if(loadedItems.item3Count > 1) then
-				--중복
-				local jungbok1 = display.newRect(30,30)
-				S1:setFillColor(1)
-				jungbok1.x, jungbok1.y =  display.contentWidth*0.1313, display.contentHeight*0.3019
-				sceneGroup:insert(jungbok1)
-				--중복 몇개?
-				local jungbok1Count = display.newText("",display.contentWidth*0.1307, display.contentHeight*0.3037)
-				jungbok1Count:setFillColor(0.9, 0.76, 0.83)
-				jungbok1Count.text = loadedItems.item1Count
-				jungbok1Count.size = 30
-				sceneGroup:insert(jungbok1Count)
-			end
-		elseif num == 4 then
-			local item4 = display.newImage("image/가방/" .. loadedItems.food4 .. ".png")
-			item4.x, item4.y =  display.contentWidth*0.3977, display.contentHeight*0.2818
-			sceneGroup:insert(item4)
-			item4.id = loadedItems.food4
-			item4.anchorX, item4.anchorY = 0,0
-			item4:addEventListener("touch", click)
-			if(loadedItems.item4Count > 1) then
-				--중복
-				local jungbok1 = display.newRect(30,30)
-				S1:setFillColor(1)
-				jungbok1.x, jungbok1.y =  display.contentWidth*0.1313, display.contentHeight*0.3019
-				sceneGroup:insert(jungbok1)
-				--중복 몇개?
-				local jungbok1Count = display.newText("",display.contentWidth*0.1307, display.contentHeight*0.3037)
-				jungbok1Count:setFillColor(0.9, 0.76, 0.83)
-				jungbok1Count.text = loadedItems.item1Count
-				jungbok1Count.size = 30
-				sceneGroup:insert(jungbok1Count)
-			end
-		elseif num == 5 then
-			local item5 = display.newImage("image/가방/" .. loadedItems.food5 .. ".png")
-			item5.x, item5.y =  display.contentWidth*0.5130, display.contentHeight*0.2818
-			sceneGroup:insert(item5)
-			item5.id = loadedItems.food5
-			item5.anchorX, item5.anchorY = 0,0
-			item5:addEventListener("touch", click)
-			if(loadedItems.item5Count > 1) then
-				--중복
-				local jungbok1 = display.newRect(30,30)
-				S1:setFillColor(1)
-				jungbok1.x, jungbok1.y =  display.contentWidth*0.1313, display.contentHeight*0.3019
-				sceneGroup:insert(jungbok1)
-				--중복 몇개?
-				local jungbok1Count = display.newText("",display.contentWidth*0.1307, display.contentHeight*0.3037)
-				jungbok1Count:setFillColor(0.9, 0.76, 0.83)
-				jungbok1Count.text = loadedItems.item1Count
-				jungbok1Count.size = 30
-				sceneGroup:insert(jungbok1Count)
-			end
-		end
+	--구매함수
+
+	local item
+	local function buy(event)
+		item=event.target.name
+		money = event.target.id
+		composer.setVariable("item", item)
+		composer.setVariable("money", money)
+		composer.removeScene("상점")
+	   	composer.gotoScene("상점_popup")
+
 	end
+	tteokbokki:addEventListener("touch",buy)
+	fishCake:addEventListener("touch",buy)
+	sundae:addEventListener("touch",buy)
+	steak:addEventListener("touch",buy)
+	fried:addEventListener("touch",buy)
 
-	local count = loadedItems.foodCount
 
-	for i=1,count do 
-		image(i)
+	local function nextStore(event)
+		composer.removeScene("상점")
+	   	composer.gotoScene("상점_옷")
 	end
+	next:addEventListener("touch",nextStore)
+	
+	
 
 
 
 
+
+
+
+
+	
 end
 
 function scene:show( event )
