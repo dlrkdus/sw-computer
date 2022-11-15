@@ -8,7 +8,7 @@ local loadsave = require( "loadsave" )
 local composer = require( "composer" )
 local json = require( "json" )
 local scene = composer.newScene()
-local loadedItem= loadsave.loadTable( "setting.json" )
+local loadedItem= loadsave.loadTable( "settings.json" )
 local loadedFood=loadsave.loadTable("food.json")
 
 function scene:create( event )
@@ -147,7 +147,7 @@ function scene:create( event )
 	sceneGroup:insert(exitText)
 
 	local function exitFunc(event)
-		composer.removeScene("상점")
+		composer.removeScene("가방_음식")
 	   	composer.gotoScene("메인화면")
 	end
 	exit:addEventListener("tap",exitFunc)
@@ -160,8 +160,8 @@ function scene:create( event )
 		money = event.target.id
 		composer.setVariable("item", item)
 		composer.setVariable("money", money)
-		composer.removeScene("상점")
-	   	composer.gotoScene("상점_popup")
+		composer.removeScene("가방_음식")
+	   	composer.gotoScene("가방_음식_popup")
 
 	end
 	tteokbokki:addEventListener("touch",buy)
@@ -172,8 +172,8 @@ function scene:create( event )
 
 
 	local function nextStore(event)
-		composer.removeScene("상점")
-	   	composer.gotoScene("상점_옷")
+		composer.removeScene("가방_음식")
+	   	composer.gotoScene("가방_옷")
 	end
 	next:addEventListener("touch",nextStore)
 	

@@ -8,7 +8,8 @@ local loadsave = require( "loadsave" )
 local composer = require( "composer" )
 local json = require( "json" )
 local scene = composer.newScene()
-local loadedSettings = loadsave.loadTable( "setting.json" )
+local loadedSettings = loadsave.loadTable( "settings.json" )
+local loadedFood=loadsave.loadTable("food.json")
 
 
 function scene:create( event )
@@ -197,23 +198,23 @@ function scene:create( event )
 	 local function buy_popup(event)
 	        if loadedSettings.money-money>=0 then
             if item=="tteokbokki" then
-               loadedSettings.tteokbokki_count=loadedSettings.tteokbokki_count+1            
+               loadedFood.tteokbokki_count=loadedFood.tteokbokki_count+1            
             end
 
             if item=="fishCake" then
-               loadedSettings.fishCake_count=loadedSettings.fishCake_count+1            
+               loadedFood.fishCake_count=loadedFood.fishCake_count+1            
             end
 
             if item=="sundae" then
-               loadedSettings.sundae_count=loadedSettings.sundae_count+1            
+               loadedFood.sundae_count=loadedFood.sundae_count+1            
             end
 
             if item=="steak" then
-               loadedSettings.steak_count=loadedSettings.steak_count+1            
+               loadedFood.steak_count=loadedFood.steak_count+1            
             end
 
             if item=="fried" then
-               loadedSettings.fried_count=loadedSettings.fried_count+1            
+               loadedFood.fried_count=loadedFood.fried_count+1            
             end
 			S1.alpha=0
 			S2text.alpha=0
@@ -223,7 +224,7 @@ function scene:create( event )
 			S3text.text="나가기"
 
             loadedSettings.money=loadedSettings.money-money
-			loadsave.saveTable(loadedSettings,"setting.json")
+			loadsave.saveTable(loadedSettings,"settings.json")
        		else
 				S1.alpha=0
 				S2text.alpha=0

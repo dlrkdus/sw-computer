@@ -8,7 +8,7 @@ local loadsave = require( "loadsave" )
 local composer = require( "composer" )
 local json = require( "json" )
 local scene = composer.newScene()
-local loadedItem= loadsave.loadTable( "setting.json" )
+local loadedSettings= loadsave.loadTable( "settings.json" )
 
 function scene:create( event )
 	local sceneGroup = self.view
@@ -24,7 +24,7 @@ function scene:create( event )
 
 
 	--돈
-	local m = loadedItem.money
+	local m = "money:  "..loadedSettings.money
 	local showLimit = display.newText(m,display.contentWidth*0.85,display.contentHeight*0.2)
 	showLimit:setFillColor(0)
 	showLimit.size =40
