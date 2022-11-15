@@ -102,6 +102,7 @@ function scene:create( event )
 	cloud5.x = 980
 	cloud5.y = 285
 
+
 	function gotoPic( event )
 		composer.gotoScene( "숨은그림찾기_솜솜")
 	end
@@ -110,9 +111,9 @@ function scene:create( event )
 		composer.gotoScene( "풍선터트리기_20초" ) 
 	end
 
-	--function gotoRepo( event )
-		--composer.gotoScene( "풍선터트리기_20초" ) 
-	--end
+	function gotoRepo( event )
+		composer.gotoScene( "학점받기" ) 
+	end
 
 	function gotoStore( event )
 		composer.gotoScene("상점")
@@ -127,10 +128,26 @@ function scene:create( event )
             local t2 = timer.performWithDelay(1000, gotoBal, 1)
         elseif event.target.name == "report" then
             --transition.to(buttonUI[3], {time = 500, alpha = 0})
-            local t3 = timer.performWithDelay(1000, gotoBal, 1)
+            local t3 = timer.performWithDelay(1000, gotoRepo, 1)
         elseif event.target.name == "store" then
             --transition.to(buttonUI[4], {time = 500, alpha = 0})
             local t4 = timer.performWithDelay(1000, gotoStore, 1)
+		elseif event.target.name == "question" then
+            --transition.to(buttonUI[4], {time = 500, alpha = 0})
+			local bg = display.newRect(display.contentCenterX, display.contentCenterY, 700, 400)
+			local guideText = display.newText(" ", display.contentWidth/2, display.contentHeight/ 2, "font/NanumJangMiCe.ttf", 30)
+			guideText:setFillColor(0)
+			guideText.text = "[솜솜이 키우기]\n\n오른쪽에 있는 미니게임으로 코인을 모아요\n모은 코인으로 상점에서 음식을 구매해 솜솜이를 키워보세요\n미니게임에는 숨은그림찾기, 풍선터트리기, 학점받기가 있답니다.\n\n돋보기-숨은그림찾기\n풍선-풍선터트리기\n시험지-학점받기게임"
+			local exit = display.newImage("image/메인/exit.png")
+			exit.x = bg.x + 310
+			exit.y = bg.y - 170
+	
+			function exitGuide(event) 
+				display.remove(bg)
+				display.remove(guideText)
+				display.remove(exit)
+			end
+			exit:addEventListener("tap", exitGuide)
         end
     end
 
@@ -168,6 +185,13 @@ function scene:create( event )
 	buttonUI[4].y = 450
 	buttonUI[4].name = "store"
 
+	buttonUI[5] = widget.newButton(
+		{	defaultFile = "image/메인/question.png", overFile = "image/메인/question.png",
+			 onPress = inputEvent})
+	buttonUI[5].x = 30
+	buttonUI[5].y = 50
+	buttonUI[5].name = "question"
+
 	sceneGroup:insert(background)
 	sceneGroup:insert(som)
 	sceneGroup:insert(cloud)
@@ -179,6 +203,7 @@ function scene:create( event )
    	sceneGroup:insert(buttonUI[2])
    	sceneGroup:insert(buttonUI[3])
    	sceneGroup:insert(buttonUI[4])
+   	sceneGroup:insert(buttonUI[5])
 end
 
 function scene:show( event )
@@ -215,6 +240,7 @@ function scene:destroy( event )
 	
 	-- Called prior to the removal of scene's "view" (sceneGroup)
 	-- 
+
 	-- INSERT code here to cleanup the scene
 	-- e.g. remove display objects, remove touch listeners, save state, etc.
 end
