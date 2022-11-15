@@ -126,6 +126,24 @@ function scene:create( event )
 
 	            cloCount=0,
 
+	            gwajam1="",
+	            gwajam2="",
+	            gwajam3="",
+	            gwajam4="",
+	            gwajam5="",
+
+	            animal1="",
+	            animal2="",
+	            animal3="",
+	            animal4="",
+	            animal5="",
+
+	            twopiece1="",
+	            twopiece2="",
+	            twopiece3="",
+	            twopiece4="",
+	            twopiece5="",
+
 	            clothes1="",
 	            clothes2="",
 	            clothes3="",

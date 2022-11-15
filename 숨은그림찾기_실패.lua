@@ -25,6 +25,15 @@ function scene:create( event )
 	local t= display.newImageRect("image/숨은그림찾기/실패테두리.png",500,500)
 	t.x,t.y = display.contentWidth/2,display.contentHeight/2
 	sceneGroup:insert(t)
+
+	local exit = display.newImageRect("image/상점/화살표_왼.png",80,140)
+	exit.x,exit.y = display.contentWidth*0.05,display.contentHeight*0.1
+	sceneGroup:insert(exit)
+
+	local exitText = display.newText("나가기",display.contentWidth*0.05,display.contentHeight*0.2)
+	exitText:setFillColor(0)
+	exitText.size =40
+	sceneGroup:insert(exitText)
 	
 
 	local hintText = display.newText("실패!",display.contentWidth*0.5, display.contentHeight*0.5,"font/NanumSquare_acB.ttf")
