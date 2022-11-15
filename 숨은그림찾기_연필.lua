@@ -10,6 +10,9 @@ local scene = composer.newScene()
 function scene:create( event )
 	local sceneGroup = self.view
 
+	local soundEffect = audio.loadSound( "bgm/picture_bg.mp3" )
+	local backgroundMusicChannel = audio.play( soundEffect, {loops=-1} )
+	audio.setVolume( 2 )
 
 	local S1=display.newRect(display.contentWidth*0.21, display.contentHeight*0.745,30,30)
 	S1:setFillColor(0)

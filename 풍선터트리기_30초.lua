@@ -37,6 +37,10 @@ end
 
 function scene:create( event )
 	local sceneGroup = self.view
+
+	local soundEffect = audio.loadSound( "bgm/balloon_bg.mp3" )
+	local backgroundMusicChannel = audio.play( soundEffect, {loops=-1} )
+	audio.setVolume( 2 )
 	
    local space = display.newRect( display.contentCenterX, display.contentCenterY, 1280, 720 )
 	space.strokeWidth = 3
@@ -56,6 +60,7 @@ function scene:create( event )
 		composer.setVariable("time", time)
 		composer.setVariable("flag", flag)
 		composer.removeScene("game")
+		audio.pause( backgroundMusicChannel )
 		if flag == 1 then
 			composer.gotoScene("풍선_success")
 		elseif flag == -1 then
