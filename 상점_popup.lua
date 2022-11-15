@@ -15,6 +15,10 @@ function scene:create( event )
 	local sceneGroup = self.view
 
 
+	local soundEffect = audio.loadSound( "bgm/store_bg.mp3" )
+	local backgroundMusicChannel = audio.play( soundEffect, {loops=-1} )
+	audio.setVolume( 2 )
+
 	local item=composer.getVariable("item", item)
 	local money=composer.getVariable("money", money)
 
@@ -227,6 +231,7 @@ function scene:create( event )
       S1:addEventListener("tap",buy_popup)
 
       local function popup_down(event)
+      	audio.pause( backgroundMusicChannel )
       	composer.removeScene("상점_popup")
         composer.gotoScene("상점")
        end

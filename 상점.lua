@@ -13,6 +13,10 @@ local loadedItem= loadsave.loadTable( "setting.json" )
 function scene:create( event )
 	local sceneGroup = self.view
 	
+	local soundEffect = audio.loadSound( "bgm/store_bg.mp3" )
+	local backgroundMusicChannel = audio.play( soundEffect, {loops=-1} )
+	audio.setVolume( 2 )
+
 
 	local background= display.newImageRect("image/숨은그림찾기/white.png",1280,720)
 	background.x,background.y = display.contentWidth/2,display.contentHeight/2

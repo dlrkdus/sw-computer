@@ -11,11 +11,15 @@ local buttonUI = {}
 function scene:create( event )
 	local sceneGroup = self.view
 
+	local soundEffect = audio.loadSound( "bgm/intro_bg.mp3" )
+	local backgroundMusicChannel = audio.play( soundEffect, {loops=-1} )
+	audio.setVolume( 1 )
 	local background = display.newImageRect( "image/시작화면/intro.jpg", display.contentWidth, display.contentHeight )
 		background.x = display.contentWidth/2
 		background.y = display.contentHeight/2
 
 	function gotoMain( event )
+		audio.pause( backgroundMusicChannel )
 		composer.gotoScene( "메인화면" )
 	end
 

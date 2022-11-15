@@ -10,6 +10,9 @@ local scene = composer.newScene()
 function scene:create( event )
 	local sceneGroup = self.view
 
+	local soundEffect = audio.loadSound( "bgm/picture_bg.mp3" )
+	local backgroundMusicChannel = audio.play( soundEffect, {loops=-1} )
+	audio.setVolume( 2 )
 
 	local S1=display.newRect(display.contentWidth*0.6, display.contentHeight*0.35,30,30)
 	S1:setFillColor(0)
@@ -72,21 +75,24 @@ function scene:create( event )
 				time=1000
 				}
 			timer.cancelAll()
+			audio.pause( backgroundMusicChannel )
 			composer.removeScene("숨은그림찾기_솜솜")
 			composer.gotoScene("숨은그림찾기_실패",options)
 		end
 	end
-	 
+	
 	timer.performWithDelay( 1000, timeAttack, 0 )
 
 	local function find(event)
 		correct.alpha=1
-		timer.cancelAll()      
+		timer.cancelAll()  
+		audio.pause( backgroundMusicChannel )    
 		composer.removeScene( "숨은그림찾기_솜솜" )
       local options={
 			effect ="fade",
 			time=1000
 		}
+		
 	  composer.gotoScene("숨은그림찾기_성공",options) 
   	end
   	S1:addEventListener("tap",find)
